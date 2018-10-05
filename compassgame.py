@@ -331,10 +331,16 @@ def hit_obstacle():
     
 # Reads high score from file and returns as a number
 def get_high_score():
-    file = open(high_score_filename, 'r')
-    entry = file.readline()
-    file.close()
-    high_score = int(entry)
+    # Open file if it already exists
+    try:
+        file = open(high_score_filename, 'r')
+        entry = file.readline()
+        file.close()
+        high_score = int(entry)
+        file_exists = True
+    except:
+        # If either doesn't exist or is corrupt
+        high_score = 0       
     return high_score
     
     
@@ -342,5 +348,9 @@ def get_high_score():
 def set_high_score(new_score):
     global high_score
     high_score = new_score
-    with open(high_score_filename, 'w') as file:
-        file.write(str(high_score))
+    try:
+        with open(high_score_filename, 'w') as file:
+            file.write(str(high_score))
+    except:
+            # Unable to write to file - warn to console
+            print ("Unable to write to file "+high_score_filename+" high scores will not be saved")

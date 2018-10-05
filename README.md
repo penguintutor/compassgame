@@ -3,17 +3,19 @@ Compass Game is a game written in Python Pygame Zero for the Raspberry Pi.
 
 Designed for use with a Picade joystick the game can also be played using the keyboard. 
 
+![Screenshot of the compass game](http://www.penguintutor.com/projects/images/compassgame01.png)
+
 ## Install
 Requires Pygame Zero to be installed (included on Raspberry Pi). 
 
-Copy the files into a directory on you computer
+Download the current version from: [GitHub Compass Game](https://github.com/penguintutor/compassgame/archive/master.zip)
 
-Add a file compassgame_score.dat with entry 0
-eg. 
-`echo 0 > compassgame_score.dat`
+Extract the files into a directory on you computer
 
 
 ## Play the game
+
+Change to the directory used for install (cd)
 
 Run using:
 
@@ -27,6 +29,8 @@ Press RIGHT SHIFT to view the map
 
 Avoid the obstacles that appear on later levels
 
+At the end of the game, press SPACE / RIGHT SHIFT to play again or ESCAPE to quit the game.
+
 
 
 ## Development
@@ -34,6 +38,11 @@ This program is currently under development. Further updates will include instal
 
 Other plans include
 * Customizable characters
+* Different level backgrounds
 * Reconfigurable keys
 * Sound effects
+* Alternative game mode (AI players)
 
+# More details
+
+The project home page is at: [PenguinTutor Compass Game](http://www.penguintutor.com/projects/compass-game)
