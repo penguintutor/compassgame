@@ -194,7 +194,6 @@ def update(time_interval):
     # If new direction is not "" then we have a move button pressed
     # so set appropriate image
     if (new_direction != ""):
-        print ("Setting direction. Was "+direction+" now "+new_direction)
         # Set image based on new_direction
         set_actor_image (direction, new_direction)
         direction = new_direction
@@ -294,12 +293,7 @@ def set_actor_image (direction, new_direction):
         player_step_count = 0
         
     player_step_position = math.floor(player_step_count / step_delay) +1
-    
-    print ("Setting image "+PLAYER_IMG_DIRECTION[new_direction]+str(player_step_position))
-    
     player.image = PLAYER_IMG_DIRECTION[new_direction]+str(player_step_position)
-    
-    print ("Player image is now "+player.image)
     
     
 #Get next direction / jump / duck 
