@@ -17,8 +17,8 @@ NEXT_LEVEL_ACTIONS = 30
 high_score_filename = 'compassgame_score.dat'
 
 #Background
-BACKGROUND_IMG = 'compassgame_background_01'
-#BACKGROUND_IMG = 'test.png'
+BACKGROUND_IMG_FILES = ['compassgame_background_01','compassgame_background_02'] 
+
 
 #Images for player in each direction - does not include final digit which is the image number
 #All must have 4 images ending with 1 to 4, except for jump and duck which only ends with 1
@@ -87,7 +87,7 @@ action_text = {'north':'Go north', 'south':'Go south',
 def draw():
     global high_score
     high_score = get_high_score()
-    screen.blit(BACKGROUND_IMG, (0,0))
+    screen.blit(get_background_img(), (0,0))
     # If game not running then give instruction
     if (game_state == ''):
         # Display message on screen
@@ -194,6 +194,7 @@ def update(time_interval):
     # If new direction is not "" then we have a move button pressed
     # so set appropriate image
     if (new_direction != ""):
+        print ("Setting direction. Was "+direction+" now "+new_direction)
         # Set image based on new_direction
         set_actor_image (direction, new_direction)
         direction = new_direction
@@ -294,7 +295,11 @@ def set_actor_image (direction, new_direction):
         
     player_step_position = math.floor(player_step_count / step_delay) +1
     
+    print ("Setting image "+PLAYER_IMG_DIRECTION[new_direction]+str(player_step_position))
+    
     player.image = PLAYER_IMG_DIRECTION[new_direction]+str(player_step_position)
+    
+    print ("Player image is now "+player.image)
     
     
 #Get next direction / jump / duck 
@@ -303,21 +308,21 @@ def get_next_move():
     return random.choice(move_choices)
     
     
-# Set new level by adding appropriate obstacles to list
+# Set new level by setting correct background and adding appropriate obstacles to list
 def set_level(level_number):
     global obstacles
 
     # Delete current obstacles
     obstacles = []    
     
-    # Start from level 2, this will mean we get two obstacles initially
-    if (level_number < 2):
+    # Start adding obstacles from level 3
+    if (level_number < 3):
         return
         
     # Max we can have is the number of obstacle_positions
     for i in range (0,len(obstacle_positions)):
-        # quit when we have reached correct number for this level (equal to the level number but indexed from 0)
-        if (i > level_number):
+        # quit when we have reached correct number for this level (equal to the level number -2 so first level with obstacles is level 3 with 2)
+        if (i > (level_number - 2)):
             break
         obstacles.append(Actor(random.choice(OBSTACLE_IMG_FILES), obstacle_positions[i]))
     
@@ -328,6 +333,13 @@ def hit_obstacle():
             return True
     return False
     
+# Gets background image from list (if not enough then return last one)
+def get_background_img():
+    # If level higher than num images return last entry
+    if game_level > len (BACKGROUND_IMG_FILES):
+        return BACKGROUND_IMG_FILES[-1]
+    else:
+        return BACKGROUND_IMG_FILES[game_level - 1]
     
 # Reads high score from file and returns as a number
 def get_high_score():
