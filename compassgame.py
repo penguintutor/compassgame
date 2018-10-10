@@ -139,8 +139,7 @@ def update(time_interval):
                 set_high_score(score)
             # Reset score
             score = 0
-            level_actions_complete = 0
-            set_level(0)
+            set_level(1)
         # If escape then quit the game
         if (keyboard.escape):
             quit()
@@ -218,7 +217,6 @@ def update(time_interval):
             timer = timer_start
             game_level += 1
             set_level(game_level)
-            level_actions_complete = 0
             # Move player back to center for level up
             player.x = WIDTH/2
             player.y = HEIGHT/2
@@ -304,8 +302,10 @@ def get_next_move():
     
 # Set new level by setting correct background and adding appropriate obstacles to list
 def set_level(level_number):
-    global obstacles
+    global game_level, level_actions_complete, obstacles
 
+    game_level = level_number
+    level_actions_complete = 0
     # Delete current obstacles
     obstacles = []    
     
