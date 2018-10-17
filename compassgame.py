@@ -80,16 +80,18 @@ west_box = Rect((0, 0), (box_size, HEIGHT))
 
 def draw():
     screen.blit(get_background_img(game_status.getLevel()), (0,0))
+    if (game_status.isGameOver() or game_status.isShowScore()):
+        screen.draw.text("Game Over\nScore "+str(game_status.getScore())+"\nHigh score "+str(high_score.getHighScore())+"\nPress map or duck button to start", fontsize=60, center=(WIDTH/2,HEIGHT/2), shadow=(1,1), color=(89,6,13), scolor="#A0A0A0")
     # If game not running then give instruction
-    if (not game_status.isGameRunning()):
+    elif (not game_status.isGameRunning()):
         # Display message on screen
-        screen.draw.text("Press map or duck button to start", fontsize=60, center=(WIDTH/2,HEIGHT/2), shadow=(1,1), color=(255,255,255), scolor="#202020")
-    elif (game_status.isGameOver()):
-        screen.draw.text("Game Over\nScore "+str(game_status.getScore())+"\nHigh score "+str(high_score.getHighScore)+"\nPress map or duck button to start", fontsize=60, center=(WIDTH/2,HEIGHT/2), shadow=(1,1), color=(255,255,255), scolor="#202020")
+        screen.draw.text("Press map or duck button to start", fontsize=60, center=(WIDTH/2,HEIGHT/2), shadow=(1,1), color=(0,112,37), scolor="#A0A0A0")
     else:
         screen.draw.text('Time: '+str(game_status.getTimeRemaining()), fontsize=60, center=(100,50), shadow=(1,1), color=(255,255,255), scolor="#202020")
         screen.draw.text('Score '+str(game_status.getScore()), fontsize=60, center=(WIDTH-130,50), shadow=(1,1), color=(255,255,255), scolor="#202020")
-        screen.draw.text(game_status.getStateString(), fontsize=60, center=(WIDTH/2,50), shadow=(1,1), color=(255,255,255), scolor="#202020")
+        # Only show state if not timer paused
+        if (not game_status.isTimerPause()):
+            screen.draw.text(game_status.getStateString(), fontsize=60, center=(WIDTH/2,50), shadow=(1,1), color=(255,255,255), scolor="#202020")
         player.draw()
         # Draw obstacles
         for i in range (0,len(obstacles)):
@@ -100,18 +102,21 @@ def draw():
             screen.draw.text(game_status.getGameMessage(), fontsize=60, center=(WIDTH/2,HEIGHT/2), shadow=(1,1), color=(255,255,255), scolor="#202020")
 
 
-    
-#def update(time_interval):
 def update():
-    # Check for pause status (so that it gets checked every cycle)
-    #if (game_status.isTimerPause()):
-    #    return
+    # Check for pause status if so only look for key press
     if (game_status.isUserPause()):
         # duck or jump to unpause (if want to use p button would need to add delay to prevent rapid toggling)
         if (keyboard.space or keyboard.lshift or keyboard.rshift or keyboard.lctrl):
             game_status.setUserPause(False)
         else:
             return
+            
+    # Check for timer pause - if so return until expired
+    if (game_status.isTimerPause()):
+        return
+    
+    # Reset message after timer finished
+    game_status.setGameMessage("")
     
     if (game_status.isGameOver()):
         if (game_status.getScore() > high_score.getHighScore()) :
@@ -128,6 +133,8 @@ def update():
             # Reset player including score
             player.reset()
             game_status.startNewGame()
+            # Reset number of obstacles etc.
+            set_level_display(game_status.getLevel())
         # If escape then quit the game
         if (keyboard.escape):
             quit()
@@ -189,18 +196,17 @@ def update():
 
     # Determine if player has reached where they should be
     if (reach_target(game_status.getCurrentMove())):
-        #current_level = game_status.getLevel()
+        current_level = game_status.getLevel()
         new_level = game_status.scorePoint()
         
         # If level changed when adding point
-        #if (current_level != new_level):
-        #    set_level(new_level)
-            
-            # Move player back to center for level up
-        #    player.setPosition(WIDTH/2,HEIGHT/2)
-        #    player.setDirection('down')
-        #    game_status.setGameMessage("Level Up!\n"+str(game_level))
-        #    game_status.setTimerPause(1)
+        if (current_level != new_level):
+            #Move player back to center for level up
+            player.setPosition(WIDTH/2,HEIGHT/2)
+            player.setDirection('down')
+            game_status.setGameMessage("Level Up!\n"+str(new_level))
+            game_status.startTimerPause()
+            set_level_display(new_level)
             
 
 # Determine if the player has reached target
@@ -225,10 +231,9 @@ def reach_target(target_pos):
     return False
 
 
-    
-# *** TODO - work this properly    
+       
 # Set new level by setting correct background and adding appropriate obstacles to list
-def set_level(level_number):
+def set_level_display(level_number):
     global obstacles
 
     # Delete current obstacles
@@ -243,7 +248,7 @@ def set_level(level_number):
         # quit when we have reached correct number for this level (equal to the level number -2 so first level with obstacles is level 3 with 2)
         if (i > (level_number - 2)):
             break
-        obstacles.append(Actor(random.choice(OBSTACLE_IMG_FILES), obstacle_positions[i]))
+        obstacles.append(Actor(OBSTACLE_IMG_FORMAT.format(random.randint(0,OBSTACLE_NUM_IMGS)), obstacle_positions[i]))
     
     
 def hit_obstacle():

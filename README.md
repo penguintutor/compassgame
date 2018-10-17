@@ -37,8 +37,9 @@ At the end of the game, press SPACE / RIGHT SHIFT to play again or ESCAPE to qui
 This program is currently under development. Further updates will include installation instructions for RetroPie (Picade).
 
 Other plans include
+* Menu system
+* Splash screen
 * Customizable characters
-* Different level backgrounds
 * Reconfigurable keys
 * Sound effects
 * Alternative game mode (AI players)

@@ -15,14 +15,15 @@ STATUS_SHOW_SCORE = 51          # End message is displayed ready to restart
 
 # Number of actions to complete before moving up to the next level
 # Default = 30 (change for debugging)
-NEXT_LEVEL_ACTIONS = 30
+#NEXT_LEVEL_ACTIONS = 30
+NEXT_LEVEL_ACTIONS = 5
 
 # Number of seconds to display high score before allowing click to continue
 TIME_DISPLAY_SCORE = 3
 
 # Number of seconds when the timer starts 
 TIMER_START = 10.9
-PAUSE_TIME = 2
+PAUSE_TIME = 4
 
 class GamePlay:
     
@@ -55,8 +56,13 @@ class GamePlay:
         self.getNextMove()
         
     def setShowScore(self):
-        self.STATUS = STATUS_SHOW_SCORE
+        self.status = STATUS_SHOW_SCORE
         self.timer_pause.startCountDown()
+        
+    def isShowScore(self):
+        if (self.status == STATUS_SHOW_SCORE):
+            return True
+        return False
         
     # Only returns true if STATUS_SHOW_SCORE and timer expired
     def isScoreShown(self):
@@ -121,8 +127,9 @@ class GamePlay:
         # Check to see if the user has scored enough to move up a level
         if (self.level_actions_complete >= NEXT_LEVEL_ACTIONS):
             self.game_timer.resetToDefault()
-            self.game_level += 1
+            self.level += 1
             self.level_actions_complete = 0
+        return self.level
         
     def getScore(self):
         return self.score
@@ -137,32 +144,34 @@ class GamePlay:
     # Return status, unless not running
     def getStateString(self):
         if (self.isGameRunning()):
-            return self.action_text[self.target]
+            return self.action_text[self.target]   
         else:
             return ("Not running")
          
     def getGameMessage(self):
-       return self.game_message
+        return self.game_message
      
       
     # If game paused normally then decrement
     # If game 0 then return False - no longer paused
     # Otherwise return True
     def isTimerPause(self):
-       if (self.timer_pause.getTimeRemaining() > 0):
-           return False
-       return True
+        if (self.timer_pause.getTimeRemaining() > 0):
+            return True
+        return False
      
     # Specifically looks if the user has paused (ie game_pause = -1)
     def isUserPause(self):
-       return self.user_pause
+        return self.user_pause
      
     # Set pause to number of updates (approx 60 per second)
     # Or set to 0 for no pause
-    # Don't use for user paus (as may change in future)
+    # Don't use for user pause (as may change in future)
     def setTimerPause(self, time):
-       self.timer_pause.startCountDown(time)
+        self.timer_pause.startCountDown(time)
 
+    def startTimerPause(self):
+        self.timer_pause.startCountDown()
     
     # Pause waiting on user - True = pause, False = not pause
     def setUserPause(self, status=True):
