@@ -18,6 +18,7 @@ from highscore import HighScore
 WIDTH = 800
 HEIGHT = 600
 TITLE = "Compass Game"
+# Unlike other images in pgzero ICON needs to have the file extension
 ICON = "icon.png"
 
 # Filename format - uses python format to add appropriate values
