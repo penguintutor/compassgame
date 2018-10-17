@@ -18,6 +18,7 @@ from highscore import HighScore
 WIDTH = 800
 HEIGHT = 600
 TITLE = "Compass Game"
+ICON = "icon.png"
 
 # Filename format - uses python format to add appropriate values
 # Variables are: theme (eg. boy/girl), character_number (00=default), direction (down=default), seq_num / step count (01 = default)
