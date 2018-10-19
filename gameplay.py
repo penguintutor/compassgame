@@ -3,14 +3,18 @@ from timer import Timer
 
 # Status is tracked as a number, but to make the code readable constants are used
 # Note the actual number isn't important, but the order is as may use > or <
-STATUS_TITLE = 0                # Title screen
+# Those with # * in the comments are used to determine higher state
+STATUS_PRE_GAME = 0             # * Used to delimit before game starts
+STATUS_TITLE = 1                # Title screen
+STATUS_MENU_START = 10          # * Used to delimit the menu
 STATUS_MENU_COLOR = 11          # Menu to change colors
 STATUS_MENU_KEYS = 12           # Menu to change key mappings
 STATUS_MENU_HIGHSCORE = 13      # View high score
 STATUS_MENU_NEWHIGHSCORE = 14   # Set a new high score
-STATUS_NEW = 20                 # Game is ready to start, but not running
+STATUS_MENU_END = 19            # * End of Menu
+STATUS_NEW = 20                 # * Game is ready to start, but not running
 STATUS_PLAYER1_START = 21
-STATUS_END = 50
+STATUS_END = 50                 # * End of game reached
 STATUS_SHOW_SCORE = 51          # End message is displayed ready to restart
 
 # Number of actions to complete before moving up to the next level
@@ -201,5 +205,11 @@ class GamePlay:
     def getStatusNum(self):
         return self.status
         
-
+    def setMenu(self):
+        self.status = STATUS_MENU_START
+        
+    def isMenu(self):
+        if (self.status >= STATUS_MENU_START and self.status <= STATUS_MENU_END):
+            return True
+        return False
         

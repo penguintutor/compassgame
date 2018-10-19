@@ -14,6 +14,7 @@ from playeractor import PlayerActor
 from gameplay import GamePlay
 from timer import Timer
 from highscore import HighScore
+from gamemenu import GameMenu
 
 WIDTH = 800
 HEIGHT = 600
@@ -70,6 +71,8 @@ obstacles = []
 # Positions to place obstacles Tuples: (x,y)
 obstacle_positions = [(200,200), (400, 400), (500,500), (80,120), (700, 150), (750,540), (200,550), (60,320), (730, 290), (390,170), (420,500) ]
 
+menu = GameMenu(WIDTH,HEIGHT)
+
 
 #Rectangles for compass points for collision detection to ensure player is in correct position
 box_size = 50 
@@ -84,6 +87,14 @@ def draw():
     screen.blit(get_background_img(game_status.getLevel()), (0,0))
     if (game_status.isGameOver() or game_status.isShowScore()):
         screen.draw.text("Game Over\nScore "+str(game_status.getScore())+"\nHigh score "+str(high_score.getHighScore())+"\nPress map or duck button to start", fontsize=60, center=(WIDTH/2,HEIGHT/2), shadow=(1,1), color=(89,6,13), scolor="#A0A0A0")
+    if (game_status.isMenu()):
+        menu.show(screen)
+    elif (game_status.isTitleScreen()):
+        # If want anything on title screen insert here
+        # Must exist with pass if nothing else 
+        pass
+    elif (game_status.isShowScore()):
+        pass
     # If game not running then give instruction
     elif (not game_status.isGameRunning()):
         # Display message on screen
@@ -112,13 +123,28 @@ def update():
             game_status.setUserPause(False)
         else:
             return
-            
     # Check for timer pause - if so return until expired
     if (game_status.isTimerPause()):
-        return
-    
+        return    
     # Reset message after timer finished
     game_status.setGameMessage("")
+    
+    if game_status.isTitleScreen():
+        game_status.setMenu()
+    
+    # Call menu update function, if return is not 0 then continue with rest of updates
+    # If return is 0 then still in menu, so don't update anything else
+    # If negative then quit the application
+    if (game_status.isMenu()):
+        result = menu.update(keyboard)
+        if (result == 'menu'):
+            # Still in menu (displayed through show()
+            return
+        elif (result == 'quit' ):
+            quit()
+        elif (result == 'start' ):
+            game_status.startNewGame()
+    
     
     if (game_status.isGameOver()):
         if (game_status.getScore() > high_score.getHighScore()) :
@@ -127,7 +153,8 @@ def update():
         
     
     # If status is not running then we give option to start or quit
-    if (game_status.isNewGame() or game_status.isTitleScreen() or game_status.isScoreShown()):
+    #if (game_status.isNewGame() or game_status.isTitleScreen() or game_status.isScoreShown()):
+    if (game_status.isNewGame() or game_status.isScoreShown()):
         # Display instructions (in draw() rather than here)
         # If jump / duck then start game
         if (keyboard.space or keyboard.lshift or keyboard.rshift or keyboard.lctrl):
