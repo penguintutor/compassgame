@@ -86,7 +86,7 @@ west_box = Rect((0, 0), (box_size, HEIGHT))
 def draw():
     screen.blit(get_background_img(game_status.getLevel()), (0,0))
     if (game_status.isGameOver() or game_status.isShowScore()):
-        screen.draw.text("Game Over\nScore "+str(game_status.getScore())+"\nHigh score "+str(high_score.getHighScore())+"\nPress map or duck button to start", fontsize=60, center=(WIDTH/2,HEIGHT/2), shadow=(1,1), color=(89,6,13), scolor="#A0A0A0")
+        screen.draw.text("Game Over\nScore "+str(game_status.getScore())+"\nHigh score "+str(high_score.getHighScore())+"\nPress map or duck button to continue", fontsize=60, center=(WIDTH/2,HEIGHT/2), shadow=(1,1), color=(89,6,13), scolor="#A0A0A0")
     if (game_status.isMenu()):
         menu.show(screen)
     elif (game_status.isTitleScreen()):
@@ -95,10 +95,6 @@ def draw():
         pass
     elif (game_status.isShowScore()):
         pass
-    # If game not running then give instruction
-    elif (not game_status.isGameRunning()):
-        # Display message on screen
-        screen.draw.text("Press map or duck button to start", fontsize=60, center=(WIDTH/2,HEIGHT/2), shadow=(1,1), color=(0,112,37), scolor="#A0A0A0")
     else:
         screen.draw.text('Time: '+str(game_status.getTimeRemaining()), fontsize=60, center=(100,50), shadow=(1,1), color=(255,255,255), scolor="#202020")
         screen.draw.text('Score '+str(game_status.getScore()), fontsize=60, center=(WIDTH-130,50), shadow=(1,1), color=(255,255,255), scolor="#202020")
@@ -131,6 +127,7 @@ def update():
     
     if game_status.isTitleScreen():
         game_status.setMenu()
+        
     
     # Call menu update function, if return is not 0 then continue with rest of updates
     # If return is 0 then still in menu, so don't update anything else
@@ -153,20 +150,20 @@ def update():
         
     
     # If status is not running then we give option to start or quit
-    #if (game_status.isNewGame() or game_status.isTitleScreen() or game_status.isScoreShown()):
     if (game_status.isNewGame() or game_status.isScoreShown()):
         # Display instructions (in draw() rather than here)
-        # If jump / duck then start game
-        if (keyboard.space or keyboard.lshift or keyboard.rshift or keyboard.lctrl):
-            
-            # Reset player including score
-            player.reset()
-            game_status.startNewGame()
-            # Reset number of obstacles etc.
-            set_level_display(game_status.getLevel())
         # If escape then quit the game
         if (keyboard.escape):
             quit()
+        # If jump / duck then start game
+        if (keyboard.space or keyboard.lshift or keyboard.rshift or keyboard.lctrl):            
+            # Reset player including score
+            player.reset()
+            #game_status.startNewGame()
+            game_status.setMenu()
+            # Reset number of obstacles etc.
+            set_level_display(game_status.getLevel())
+        
         return
     
 
@@ -174,14 +171,45 @@ def update():
         game_status.setGameOver()
         return
         
+
     
+    handle_keyboard()
+    
+    # Has player hit an obstacle?
+    if (hit_obstacle()):
+        game_status.setGameOver()
+        return 
+
+    check_position()
+
+
+            
+# Checks if target readhed, if so add score, see if level required             
+def check_position():
+    # Determine if player has reached where they should be
+    if (reach_target(game_status.getCurrentMove())):
+        current_level = game_status.getLevel()
+        new_level = game_status.scorePoint()
+        
+        # If level changed when adding point
+        if (current_level != new_level):
+            #Move player back to center for level up
+            player.setPosition(WIDTH/2,HEIGHT/2)
+            player.setDirection('down')
+            game_status.setGameMessage("Level Up!\n"+str(new_level))
+            game_status.startTimerPause()
+            set_level_display(new_level)
+    
+            
+
+# Actions based on keyboard press (includes joystick / buttons on picade)
+def handle_keyboard():
     # Check for direction keys pressed
     # Can have multiple pressed in which case we move in all the directions
     # The last one in the order below is set as the direction to determine the 
     # image to use 
     new_direction = ''
     
-    ## Actions based on keyboard press
     # Check for pause button first
     if (keyboard.p):
         game_status.setUserPause()
@@ -218,25 +246,7 @@ def update():
         # Set image based on new_direction
         player.updImage(new_direction)
         
-    # Has player hit an obstacle?
-    if (hit_obstacle()):
-        game_status.setGameOver()
-        return 
 
-    # Determine if player has reached where they should be
-    if (reach_target(game_status.getCurrentMove())):
-        current_level = game_status.getLevel()
-        new_level = game_status.scorePoint()
-        
-        # If level changed when adding point
-        if (current_level != new_level):
-            #Move player back to center for level up
-            player.setPosition(WIDTH/2,HEIGHT/2)
-            player.setDirection('down')
-            game_status.setGameMessage("Level Up!\n"+str(new_level))
-            game_status.startTimerPause()
-            set_level_display(new_level)
-            
 
 # Determine if the player has reached target
 # Can be either certain position on screen (Rects defined earlier) or duck / map(jump)

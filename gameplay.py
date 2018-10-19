@@ -19,8 +19,8 @@ STATUS_SHOW_SCORE = 51          # End message is displayed ready to restart
 
 # Number of actions to complete before moving up to the next level
 # Default = 30 (change for debugging)
-#NEXT_LEVEL_ACTIONS = 30
-NEXT_LEVEL_ACTIONS = 5
+NEXT_LEVEL_ACTIONS = 30
+#NEXT_LEVEL_ACTIONS = 5
 
 # Number of seconds to display high score before allowing click to continue
 TIME_DISPLAY_SCORE = 3

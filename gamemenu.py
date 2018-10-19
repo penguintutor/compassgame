@@ -82,6 +82,8 @@ class GameMenu:
             self.menu_timer.startCountDown()
         elif (keyboard.space or keyboard.lshift or keyboard.rshift or keyboard.lctrl or keyboard.RETURN):
             if (self.menu_items[self.menu_pos].getCommand() == 'quit' or self.menu_items[self.menu_pos].getCommand() == 'start'):
+                # Reset menu to start position
+                self.reset()
                 return self.menu_items[self.menu_pos].getCommand()
         elif (keyboard.escape):
             return 'quit'
@@ -103,4 +105,6 @@ class GameMenu:
             pos_num+=1
 
     
+    def reset(self):
+        pos_num = 0
     
