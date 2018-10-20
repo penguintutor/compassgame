@@ -27,7 +27,7 @@ TIME_DISPLAY_SCORE = 3
 
 # Number of seconds when the timer starts 
 TIMER_START = 10.9
-PAUSE_TIME = 1
+PAUSE_TIME = 1.5
 
 class GamePlay:
     
@@ -127,7 +127,6 @@ class GamePlay:
             new_timer_time = timer_start
         self.game_timer.startCountDown(new_timer_time)
         
-        # Check to see if the user has scored enough to move up a level
         # Check to see if the user has scored enough to move up a level
         if (self.level_actions_complete >= NEXT_LEVEL_ACTIONS):
             self.game_timer.resetToDefault()

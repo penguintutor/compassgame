@@ -80,6 +80,7 @@ class GameMenu:
         # check if status is clicked - which means mouse was pressed on a valid entry
         if (self.status == STATUS_CLICKED):
             selected_command = self.menu_items[self.menu_pos].getCommand()
+            self.status = STATUS_MENU
         # check if we are in menu timer in which case return until expired
         elif (self.menu_timer.getTimeRemaining() > 0): 
             return 'menu'

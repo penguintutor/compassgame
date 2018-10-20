@@ -16,6 +16,11 @@ from timer import Timer
 from highscore import HighScore
 from gamemenu import GameMenu
 
+# Need to use RETURN in pgzero keyboard - whilst waiting for fix under pgzero #134 to filter through
+# Disable depreceation warnings
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning) 
+
 WIDTH = 800
 HEIGHT = 600
 TITLE = "Compass Game"
@@ -160,7 +165,6 @@ def update():
         if (keyboard.space or keyboard.lshift or keyboard.rshift or keyboard.lctrl):            
             # Reset player including score
             player.reset()
-            #game_status.startNewGame()
             game_status.setMenu()
             # Reset number of obstacles etc.
             set_level_display(game_status.getLevel())
@@ -171,7 +175,6 @@ def update():
     if (game_status.isGameRunning and game_status.getTimeRemaining() < 1):
         game_status.setGameOver()
         return
-        
 
     
     handle_keyboard()
@@ -194,6 +197,13 @@ def on_mouse_down(pos, button):
         return
     if (game_status.isMenu()):
         menu.mouse_click(pos)
+    # If status waiting on click to go to menu allow this to be mouse
+    if (game_status.isNewGame() or game_status.isScoreShown()):
+        # Reset player including score
+        player.reset()
+        game_status.setMenu()
+        # Reset number of obstacles etc.
+        set_level_display(game_status.getLevel())
         
 
             
