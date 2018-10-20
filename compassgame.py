@@ -183,6 +183,18 @@ def update():
     check_position()
 
 
+def on_mouse_move(pos):
+    if (game_status.isMenu()):
+        menu.mouse_move(pos)
+        
+def on_mouse_down(pos, button):
+    # Only look for left button
+    if (button != mouse.LEFT):
+        return
+    if (game_status.isMenu()):
+        menu.mouse_click(pos)
+        
+
             
 # Checks if target readhed, if so add score, see if level required             
 def check_position():

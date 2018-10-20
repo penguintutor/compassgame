@@ -19,17 +19,20 @@ class MenuItem:
     def getCommand(self):
         return self.command
     
-
+# Status values
+STATUS_MENU = 0
+STATUS_CLICKED = 1
+STATUS_SUBMENU = 2
 
 class GameMenu:
     
     menu_items = [
         MenuItem('Start game', 'start'),
-        #MenuItem('Instructions', 'instructions'),
-        #MenuItem('Customize character', 'character'),
-        #MenuItem('Game controls', 'controls'),
-        #MenuItem('View high scores', 'highscore'),
-        #MenuItem('Credits', 'credits'),
+        MenuItem('Instructions', 'instructions'),
+        MenuItem('Customize character', 'character'),
+        MenuItem('Game controls', 'controls'),
+        MenuItem('View high scores', 'highscore'),
+        MenuItem('Credits', 'credits'),
         MenuItem('Quit', 'quit')
     ]
     
@@ -38,6 +41,7 @@ class GameMenu:
     menu_spacing = 50 # distance between menu items
     top_spacing = 20  # distance between top of menu and start of menu
     menu_font_size = 45   # size of font for menu items
+    status = STATUS_MENU         # Track whether to display menu or in menu etc.
 
 
     # Requires width and height - these can be the same as the screen or smaller if need to constrain menu
@@ -71,24 +75,33 @@ class GameMenu:
     # If return is 'quit' then quit the application
     # Any other return is next instruction 
     def update(self, keyboard):
-        # First check if we are in menu timer in which case return until expired
-        if (self.menu_timer.getTimeRemaining() > 0): 
+        # set status_selected if menu status changed (through mouse click or press)
+        selected_command = ""
+        # check if status is clicked - which means mouse was pressed on a valid entry
+        if (self.status == STATUS_CLICKED):
+            selected_command = self.menu_items[self.menu_pos].getCommand()
+        # check if we are in menu timer in which case return until expired
+        elif (self.menu_timer.getTimeRemaining() > 0): 
             return 'menu'
-        if (keyboard.up and self.menu_pos>0):
+        elif (keyboard.up and self.menu_pos>0):
             self.menu_pos -= 1
             self.menu_timer.startCountDown()
         elif (keyboard.down and self.menu_pos<len(self.menu_items)-1):
             self.menu_pos += 1
             self.menu_timer.startCountDown()
         elif (keyboard.space or keyboard.lshift or keyboard.rshift or keyboard.lctrl or keyboard.RETURN):
-            if (self.menu_items[self.menu_pos].getCommand() == 'quit' or self.menu_items[self.menu_pos].getCommand() == 'start'):
-                # Reset menu to start position
-                self.reset()
-                return self.menu_items[self.menu_pos].getCommand()
+            selected_command = self.menu_items[self.menu_pos].getCommand()
         elif (keyboard.escape):
-            return 'quit'
-        # Reach this point then remain in menu
-        return 'menu'
+            selected_command = 'quit'
+            
+        # If a menu object was clicked / chosen then handle
+        if (selected_command == 'quit' or selected_command == 'start'):
+            # Reset menu to start position
+            self.reset()
+            return self.menu_items[self.menu_pos].getCommand()
+        else:
+            return 'menu'
+
     
     def show(self, screen):
         # Create a rectangle across the area
@@ -104,7 +117,30 @@ class GameMenu:
             screen.draw.text(self.menu_items[menu_num].getText(), fontsize=self.menu_font_size, midtop=(self.width/2,self.offset[1]+self.border+(self.menu_spacing*menu_num)+self.top_spacing), color=(0,0,0), background=background_color)
             pos_num+=1
 
+    def mouse_move(self, pos):
+        return_val = self.get_mouse_menu_pos(pos)
+        if return_val != -1:
+            self.menu_pos = return_val
+
+
+    def mouse_click(self, pos):
+        return_val = self.get_mouse_menu_pos(pos)
+        if return_val != -1:
+            self.menu_pos = return_val
+            self.status = STATUS_CLICKED
     
     def reset(self):
         pos_num = 0
+        status = STATUS_MENU
     
+    
+    # Checks if mouse is over menu and if so returns menu position
+    # Otherwise returns -1
+    def get_mouse_menu_pos (self, pos):
+        if (pos[0] > self.start_pos[0] and pos[1] > self.start_pos[1] + self.top_spacing and pos[0] < self.start_pos[0] + self.size[0] and pos[1] < self.start_pos[1] + self.size[1]):
+            start_y = self.start_pos[1] + self.top_spacing
+            for this_menu_pos in range(0,len(self.menu_items)):
+                if (pos[1] - start_y >= this_menu_pos * self.menu_spacing and pos[1] - start_y <= (this_menu_pos * self.menu_spacing)+self.menu_spacing):
+                    return this_menu_pos
+        # If not returned then not over menu
+        return -1
