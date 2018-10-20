@@ -18,14 +18,15 @@ class Timer():
             self.set_time = new_time
         self.start_time = time.time()
 
-    # Returns time remaining to nearest second
+    # Returns time remaining note full accuracy - if need only seconds use math.floor
     def getTimeRemaining(self):
         # Set time - diff start and current time (as current time is bigger)
         current_time = self.set_time + self.start_time - time.time()
         if (current_time <= 0): 
             return 0
         #return math.ceil(current_time)
-        return math.floor(current_time)
+        #return math.floor(current_time)
+        return current_time
         
     def resetToDefault(self):
         self.startCountDown(self.default_time)

@@ -86,7 +86,7 @@ west_box = Rect((0, 0), (box_size, HEIGHT))
 def draw():
     screen.blit(get_background_img(game_status.getLevel()), (0,0))
     if (game_status.isGameOver() or game_status.isShowScore()):
-        screen.draw.text("Game Over\nScore "+str(game_status.getScore())+"\nHigh score "+str(high_score.getHighScore())+"\nPress map or duck button to continue", fontsize=60, center=(WIDTH/2,HEIGHT/2), shadow=(1,1), color=(89,6,13), scolor="#A0A0A0")
+        screen.draw.text("Game Over\nScore "+str(game_status.getScore())+"\nHigh score "+str(high_score.getHighScore())+"\nPress map or duck button to continue", fontsize=60, center=(WIDTH/2,HEIGHT/2), color=(89,6,13))
     if (game_status.isMenu()):
         menu.show(screen)
     elif (game_status.isTitleScreen()):
@@ -96,7 +96,8 @@ def draw():
     elif (game_status.isShowScore()):
         pass
     else:
-        screen.draw.text('Time: '+str(game_status.getTimeRemaining()), fontsize=60, center=(100,50), shadow=(1,1), color=(255,255,255), scolor="#202020")
+        time_remaining_secs = math.floor(game_status.getTimeRemaining())
+        screen.draw.text('Time: '+str(time_remaining_secs), fontsize=60, center=(100,50), shadow=(1,1), color=(255,255,255), scolor="#202020")
         screen.draw.text('Score '+str(game_status.getScore()), fontsize=60, center=(WIDTH-130,50), shadow=(1,1), color=(255,255,255), scolor="#202020")
         # Only show state if not timer paused
         if (not game_status.isTimerPause()):
@@ -155,7 +156,7 @@ def update():
         # If escape then quit the game
         if (keyboard.escape):
             quit()
-        # If jump / duck then start game
+        # If jump / duck then go to menu
         if (keyboard.space or keyboard.lshift or keyboard.rshift or keyboard.lctrl):            
             # Reset player including score
             player.reset()

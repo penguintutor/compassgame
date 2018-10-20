@@ -27,7 +27,7 @@ TIME_DISPLAY_SCORE = 3
 
 # Number of seconds when the timer starts 
 TIMER_START = 10.9
-PAUSE_TIME = 4
+PAUSE_TIME = 1
 
 class GamePlay:
     
@@ -207,6 +207,7 @@ class GamePlay:
         
     def setMenu(self):
         self.status = STATUS_MENU_START
+        self.timer_pause.startCountDown()
         
     def isMenu(self):
         if (self.status >= STATUS_MENU_START and self.status <= STATUS_MENU_END):
