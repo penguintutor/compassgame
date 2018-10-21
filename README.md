@@ -29,9 +29,6 @@ Press RIGHT SHIFT to view the map
 
 Avoid the obstacles that appear on later levels
 
-At the end of the game, press SPACE / RIGHT SHIFT to play again or ESCAPE to quit the game.
-
-
 
 ## Development
 This program is currently under development. Further updates will include installation instructions for RetroPie (Picade).

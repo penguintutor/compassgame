@@ -141,7 +141,7 @@ def update():
     if (game_status.isMenu()):
         result = menu.update(keyboard)
         if (result == 'menu'):
-            # Still in menu (displayed through show()
+            # Still in menu (displayed through show())
             return
         elif (result == 'quit' ):
             quit()
