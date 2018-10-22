@@ -111,7 +111,6 @@ class GameMenu:
                 self.menu_items[i].setPage(self.menu_pages[self.menu_items[i].getCommand()])
                 
         
-        
     # Update menu based on keyboard direction
     # If return is 'menu' then still in menu, so don't update anything else
     # If return is 'quit' then quit the application
@@ -160,6 +159,8 @@ class GameMenu:
             self.status = STATUS_PAGE
             self.menu_timer.startCountDown()
             return 'menu'
+        elif (selected_command_type == 'subcommand'):
+            return selected_command
         else:
             return 'menu'
 

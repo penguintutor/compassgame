@@ -15,6 +15,8 @@ from gameplay import GamePlay
 from timer import Timer
 from highscore import HighScore
 from gamemenu import GameMenu
+from customcharacter import CustomCharacter
+from customcontrols import CustomControls
 
 # Need to use RETURN in pgzero keyboard - whilst waiting for fix under pgzero #134 to filter through
 # Disable depreceation warnings
@@ -86,12 +88,28 @@ east_box = Rect((WIDTH-box_size, 0), (WIDTH, HEIGHT))
 south_box = Rect((0, HEIGHT-box_size), (WIDTH, HEIGHT))
 west_box = Rect((0, 0), (box_size, HEIGHT))
 
+# These are used for the menu sub commands - must be classes
+# Must implement show() display() mouse_move() and mouse_click()
+sub_commands = {
+    'character' : CustomCharacter(),
+    'controls' : CustomControls(),
+    'highscore' : high_score
+}
+
 
 
 def draw():
+    # Check for sub command first as they use own background image
+    if (game_status.isSubCommand()):
+        sub_commands[game_status.getSubCommand()].draw(screen)
+        return
+        
+    # Draw background
     screen.blit(get_background_img(game_status.getLevel()), (0,0))
+    
     if (game_status.isGameOver() or game_status.isShowScore()):
-        screen.draw.text("Game Over\nScore "+str(game_status.getScore())+"\nHigh score "+str(high_score.getHighScore())+"\nPress map or duck button to continue", fontsize=60, center=(WIDTH/2,HEIGHT/2), color=(89,6,13))
+        screen.draw.text("Game Over\nScore "+str(game_status.getScore()), fontsize=60, center=(WIDTH/2,200), color=(89,6,13))
+        high_score.showScores(screen, (200,270))
     if (game_status.isMenu()):
         menu.show(screen)
     elif (game_status.isTitleScreen()):
@@ -147,11 +165,23 @@ def update():
             quit()
         elif (result == 'start' ):
             game_status.startNewGame()
+        # Otherwise likely to be subcommand
+        elif result in sub_commands:
+            game_status.setSubCommand(result)
+            # Starts the timer
+            sub_commands[result].select()
+
+            
+    if (game_status.isSubCommand()):
+        result = sub_commands[game_status.getSubCommand()].update(keyboard)
+        if result == 'menu':
+            game_status.setMenu()
+        return
     
     
     if (game_status.isGameOver()):
-        if (game_status.getScore() > high_score.getHighScore()) :
-                high_score.setHighScore(game_status.getScore())
+        #if (game_status.getScore() > high_score.getHighScore()) :
+        #        high_score.setHighScore(game_status.getScore())
         game_status.setShowScore()
         
     

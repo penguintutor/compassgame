@@ -7,13 +7,10 @@ from timer import Timer
 STATUS_PRE_GAME = 0             # * Used to delimit before game starts
 STATUS_TITLE = 1                # Title screen
 STATUS_MENU_START = 10          # * Used to delimit the menu
-STATUS_MENU_COLOR = 11          # Menu to change colors
-STATUS_MENU_KEYS = 12           # Menu to change key mappings
-STATUS_MENU_HIGHSCORE = 13      # View high score
-STATUS_MENU_NEWHIGHSCORE = 14   # Set a new high score
 STATUS_MENU_END = 19            # * End of Menu
-STATUS_NEW = 20                 # * Game is ready to start, but not running
-STATUS_PLAYER1_START = 21
+STATUS_SUBCOMMAND = 21
+STATUS_NEW = 30                 # * Game is ready to start, but not running
+STATUS_PLAYER1_START = 31
 STATUS_END = 50                 # * End of game reached
 STATUS_SHOW_SCORE = 51          # End message is displayed ready to restart
 
@@ -200,10 +197,6 @@ class GamePlay:
         return self.game_timer.getTimeRemaining()
         
         
-    # Gets the current status as a number - use for debugging only
-    def getStatusNum(self):
-        return self.status
-        
     def setMenu(self):
         self.status = STATUS_MENU_START
         self.timer_pause.startCountDown()
@@ -213,3 +206,22 @@ class GamePlay:
             return True
         return False
         
+        
+    def setSubCommand(self, sub_command):
+        self.sub_command = sub_command
+        self.status = STATUS_SUBCOMMAND
+        
+    def isSubCommand(self):
+        if self.status == STATUS_SUBCOMMAND:
+            return True
+        return False
+        
+    def getSubCommand(self):
+        if self.status == STATUS_SUBCOMMAND:
+            return self.sub_command
+        return None
+        
+        
+    # Gets the current status as a number - use for debugging only
+    def getStatusNum(self):
+        return self.status
