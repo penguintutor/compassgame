@@ -8,16 +8,25 @@ class HighScore():
     # If set to true then print error message to console if unable to write to high score file
     debug = True
     
+    # Values is score as int and names is name of user (3 initials)
+    # Must be ordered high to low
     high_score_values = []
     high_score_names = []
+    
+    max_entries = 10
+    
+    # Mode is normally display except when adding new score
+    # in which case it is set to edit, then save when updating
+    mode = 'display'
+    
     
 
     def __init__(self, filename):
         self.filename = filename
         # Setup high score when created
         self.loadHighScore()
-        # Timer restrict keyboard movements to every 1/2 second (prevent multiple presses)
-        self.pause_timer = Timer(0.25)
+        # Timer restrict keyboard movements to fraction of second (prevent multiple presses)
+        self.pause_timer = Timer(0.2)
         
     # indicate we change to this display mode
     # starts timer to prevent next click exit
@@ -37,32 +46,69 @@ class HighScore():
                 self.high_score_values.append(this_score_num)
                 self.high_score_names.append(this_name)
             file_exists = True
-        except:
+        except Exception as e:
+            # Unable to write to file - warn to console
+            if (self.debug == True):
+                print ("Unable to read file "+self.filename+" high scores will not be reset\n"+str(e))
             # If either doesn't exist or is corrupt add single dummy entry
             self.high_score_values.append(0)
             self.high_score_names.append("---")
         
-    # Returns current high score
-    def getHighScore(self):
-        #return self.high_score
-        pass
+    # Checks if high score is achieved
+    def checkHighScore(self, new_score):
+        # first make sure we have a score, otherwise don't enter
+        if (new_score < 1): 
+            return False
+        # Check if we have space - if so then always a high score
+        if (len(self.high_score_values) < self.max_entries):
+            return True
+        # Check if high score is higher than last entry 
+        if (new_score > self.high_score_values[self.max_entries] - 1):
+            return True
+        return False
         
-    # Writes a high score to the file
+    # Initiates enter name mode
     def setHighScore(self, new_score):
-        # Set high score even if unable to save
-        self.high_score = new_score
+        self.mode = 'edit'
+        self.new_score = new_score
+        # Name is initials - list of 3 characters
+        self.new_name = ['-','-','-']
+        self.char_selected = 0
+        
+    def saveHighScore(self):
         try:
             with open(self.filename, 'w') as file:
-                file.write(str(self.high_score))
-        except:
-                # Unable to write to file - warn to console
-                if (self.debug == True):
-                    print ("Unable to write to file "+self.filename+" high scores will not be saved")
+                for i in range (0,len(self.high_score_values)):
+                    file.write(self.high_score_names[i]+","+str(self.high_score_values[i])+"\n")
+        except Exception as e:
+            # Unable to write to file - warn to console
+            if (self.debug == True):
+                print ("Unable to write to file "+self.filename+" high scores will not be saved\n"+str(e))
+
                     
     def draw(self, screen):
         screen.blit(self.background_img, (0,0))
         screen.draw.text('High Scores', fontsize=60, center=(400,50), shadow=(1,1), color=(255,255,255), scolor="#202020")
-        self.showScores(screen, (200,120))
+        y_pos = 120
+        if (self.mode == 'edit'):
+            screen.draw.text('New High Score '+str(self.new_score), fontsize=40, center=(400,120), color=(255,0,0))
+            
+            # Set colour for characters (so selected one is different colour)
+            # Done using array 
+            
+            char_colours = [(255,0,0),(255,0,0),(255,0,0)]
+            char_colours[self.char_selected] = (0,0,0)
+            
+            
+            # Three characters for new name
+            screen.draw.text(self.new_name[0], fontsize=40, center=(380,180), color=char_colours[0])
+            # Three characters for new name
+            screen.draw.text(self.new_name[1], fontsize=40, center=(400,180), color=char_colours[1])
+            # Three characters for new name
+            screen.draw.text(self.new_name[2], fontsize=40, center=(420,180), color=char_colours[2])
+            
+            y_pos = 240
+        self.showScores(screen, (200,y_pos))
         
     # Draws scores directly onto screen. pos is the top left of the scores
     def showScores(self,screen, pos):
@@ -77,12 +123,74 @@ class HighScore():
     
     def update(self, keyboard):
         if (self.pause_timer.getTimeRemaining() > 0):
-            return
+            return 'highscore'
+        if (self.mode == 'edit'):
+            # Editing
+            if (keyboard.up):
+                self.new_name[self.char_selected] = self.charIncrement(self.new_name[self.char_selected])
+                self.pause_timer.startCountDown()
+            if (keyboard.down):
+                self.new_name[self.char_selected] = self.charDecrement(self.new_name[self.char_selected])
+                self.pause_timer.startCountDown()
+            if (keyboard.left) :
+                if (self.char_selected > 0) :
+                    self.char_selected -= 1
+                    self.pause_timer.startCountDown()
+            if (keyboard.right) :
+                if (self.char_selected < 2) :
+                    self.char_selected += 1
+                    self.pause_timer.startCountDown()
+            # If save chosen (map / jump / enter)
+            if (keyboard.space or keyboard.lshift or keyboard.rshift or keyboard.lctrl or keyboard.RETURN):
+                self.updHighScoreList()
+                self.saveHighScore()
+                self.mode = 'display'
+                return 'menu'
+            else:
+                return 'highscore'
         if (keyboard.space or keyboard.lshift or keyboard.rshift or keyboard.lctrl or keyboard.RETURN):
             return 'menu'
+        return 'highscore'
     
-    def mouse_move (self,po):
+    def mouse_move (self,pos):
         pass
     
     def mouse_click (self,pos):
         pass
+    
+    
+    def updHighScoreList(self):
+        # Go down the list until we find an entry that is smaller and insert there
+        for i in range (0,len(self.high_score_values)):
+            if (self.high_score_values[i] < self.new_score):
+                self.high_score_values.insert(i,self.new_score)
+                self.high_score_names.insert(i,self.new_name[0]+self.new_name[1]+self.new_name[2])
+                break
+        # If have more than max then drop the last entry
+        if (len(self.high_score_values) > self.max_entries):
+            self.high_score_values.pop()
+            self.high_score_names.pop()
+        # If last entry is score 0 then drop that as well (dummy entry)
+        if (self.high_score_values[-1] == 0):
+            self.high_score_values.pop()
+            self.high_score_names.pop()
+    
+    
+    #### To keep characters scrolling simple for user we only allow capital letters, numbers and -
+    def charIncrement (self, current_char):
+        if (current_char == '-') :
+            return ('A')
+        if (current_char == 'Z') :
+            return ('0') 
+        if (current_char == '9') :
+            return ('-') 
+        return chr(ord(current_char) + 1)
+        
+    def charDecrement (self, current_char):
+        if (current_char == '-') :
+            return ('9')
+        if (current_char == 'A') :
+            return ('-') 
+        if (current_char == '0') :
+            return ('Z') 
+        return chr(ord(current_char) - 1)

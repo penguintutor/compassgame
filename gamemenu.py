@@ -100,7 +100,7 @@ class GameMenu:
 
         
         # Timer restrict keyboard movements to every 1/2 second (prevent multiple presses)
-        self.menu_timer = Timer(0.25)
+        self.menu_timer = Timer(0.15)
         
         # Finish setting up MenuItems
         # At the moment this doesn't provide much extra functionality, but by 

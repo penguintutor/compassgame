@@ -180,9 +180,12 @@ def update():
     
     
     if (game_status.isGameOver()):
-        #if (game_status.getScore() > high_score.getHighScore()) :
-        #        high_score.setHighScore(game_status.getScore())
-        game_status.setShowScore()
+        if high_score.checkHighScore(game_status.getScore()) :
+            high_score.setHighScore(game_status.getScore())
+            game_status.setSubCommand('highscore')
+            sub_commands['highscore'].select()
+        else:
+            game_status.setShowScore()
         
     
     # If status is not running then we give option to start or quit
