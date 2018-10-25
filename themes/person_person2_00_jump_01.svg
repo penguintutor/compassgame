@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.2" width="20.37mm" height="40.56mm" viewBox="9252 13955 2037 4056" preserveAspectRatio="xMidYMid" fill-rule="evenodd" stroke-width="28.222" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" xmlns:ooo="http://xml.openoffice.org/svg/export" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:presentation="http://sun.com/xmlns/staroffice/presentation" xmlns:smil="http://www.w3.org/2001/SMIL20/" xmlns:anim="urn:oasis:names:tc:opendocument:xmlns:animation:1.0" xml:space="preserve">
+ <defs class="ClipPathGroup">
+  <clipPath id="presentation_clip_path" clipPathUnits="userSpaceOnUse">
+   <rect x="9252" y="13955" width="2037" height="4056"/>
+  </clipPath>
+  <clipPath id="presentation_clip_path_shrink" clipPathUnits="userSpaceOnUse">
+   <rect x="9254" y="13959" width="2033" height="4048"/>
+  </clipPath>
+ </defs>
+ <defs class="TextShapeIndex">
+  <g ooo:slide="id1" ooo:id-list="id3 id4 id5 id6 id7 id8 id9 id10 id11 id12 id13 id14 id15 id16 id17 id18 id19 id20 id21 id22 id23 id24"/>
+ </defs>
+ <defs class="EmbeddedBulletChars">
+  <g id="bullet-char-template-57356" transform="scale(0.00048828125,-0.00048828125)">
+   <path d="M 580,1141 L 1163,571 580,0 -4,571 580,1141 Z"/>
+  </g>
+  <g id="bullet-char-template-57354" transform="scale(0.00048828125,-0.00048828125)">
+   <path d="M 8,1128 L 1137,1128 1137,0 8,0 8,1128 Z"/>
+  </g>
+  <g id="bullet-char-template-10146" transform="scale(0.00048828125,-0.00048828125)">
+   <path d="M 174,0 L 602,739 174,1481 1456,739 174,0 Z M 1358,739 L 309,1346 659,739 1358,739 Z"/>
+  </g>
+  <g id="bullet-char-template-10132" transform="scale(0.00048828125,-0.00048828125)">
+   <path d="M 2015,739 L 1276,0 717,0 1260,543 174,543 174,936 1260,936 717,1481 1274,1481 2015,739 Z"/>
+  </g>
+  <g id="bullet-char-template-10007" transform="scale(0.00048828125,-0.00048828125)">
+   <path d="M 0,-2 C -7,14 -16,27 -25,37 L 356,567 C 262,823 215,952 215,954 215,979 228,992 255,992 264,992 276,990 289,987 310,991 331,999 354,1012 L 381,999 492,748 772,1049 836,1024 860,1049 C 881,1039 901,1025 922,1006 886,937 835,863 770,784 769,783 710,716 594,584 L 774,223 C 774,196 753,168 711,139 L 727,119 C 717,90 699,76 672,76 641,76 570,178 457,381 L 164,-76 C 142,-110 111,-127 72,-127 30,-127 9,-110 8,-76 1,-67 -2,-52 -2,-32 -2,-23 -1,-13 0,-2 Z"/>
+  </g>
+  <g id="bullet-char-template-10004" transform="scale(0.00048828125,-0.00048828125)">
+   <path d="M 285,-33 C 182,-33 111,30 74,156 52,228 41,333 41,471 41,549 55,616 82,672 116,743 169,778 240,778 293,778 328,747 346,684 L 369,508 C 377,444 397,411 428,410 L 1163,1116 C 1174,1127 1196,1133 1229,1133 1271,1133 1292,1118 1292,1087 L 1292,965 C 1292,929 1282,901 1262,881 L 442,47 C 390,-6 338,-33 285,-33 Z"/>
+  </g>
+  <g id="bullet-char-template-9679" transform="scale(0.00048828125,-0.00048828125)">
+   <path d="M 813,0 C 632,0 489,54 383,161 276,268 223,411 223,592 223,773 276,916 383,1023 489,1130 632,1184 813,1184 992,1184 1136,1130 1245,1023 1353,916 1407,772 1407,592 1407,412 1353,268 1245,161 1136,54 992,0 813,0 Z"/>
+  </g>
+  <g id="bullet-char-template-8226" transform="scale(0.00048828125,-0.00048828125)">
+   <path d="M 346,457 C 273,457 209,483 155,535 101,586 74,649 74,723 74,796 101,859 155,911 209,963 273,989 346,989 419,989 480,963 531,910 582,859 608,796 608,723 608,648 583,586 532,535 482,483 420,457 346,457 Z"/>
+  </g>
+  <g id="bullet-char-template-8211" transform="scale(0.00048828125,-0.00048828125)">
+   <path d="M -4,459 L 1135,459 1135,606 -4,606 -4,459 Z"/>
+  </g>
+  <g id="bullet-char-template-61548" transform="scale(0.00048828125,-0.00048828125)">
+   <path d="M 173,740 C 173,903 231,1043 346,1159 462,1274 601,1332 765,1332 928,1332 1067,1274 1183,1159 1299,1043 1357,903 1357,740 1357,577 1299,437 1183,322 1067,206 928,148 765,148 601,148 462,206 346,322 231,437 173,577 173,740 Z"/>
+  </g>
+ </defs>
+ <defs class="TextEmbeddedBitmaps"/>
+ <g class="SlideGroup">
+  <g>
+   <g id="container-id1">
+    <g id="id1" class="Slide" clip-path="url(#presentation_clip_path)">
+     <g class="Page">
+      <g class="com.sun.star.drawing.CustomShape">
+       <g id="id3">
+        <rect class="BoundingBox" stroke="none" fill="none" x="9515" y="13959" width="1549" height="1814"/>
+        <path fill="rgb(153,102,51)" stroke="none" d="M 10288,13960 C 10726,13960 11060,14352 11060,14865 11060,15378 10726,15770 10288,15770 9850,15770 9516,15378 9516,14865 9516,14352 9850,13960 10288,13960 Z M 9516,13960 L 9516,13960 Z M 11062,15771 L 11062,15771 Z"/>
+        <path fill="none" stroke="rgb(0,0,0)" d="M 10288,13960 C 10726,13960 11060,14352 11060,14865 11060,15378 10726,15770 10288,15770 9850,15770 9516,15378 9516,14865 9516,14352 9850,13960 10288,13960 Z"/>
+        <path fill="none" stroke="rgb(0,0,0)" d="M 9516,13960 L 9516,13960 Z"/>
+        <path fill="none" stroke="rgb(0,0,0)" d="M 11062,15771 L 11062,15771 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.CustomShape">
+       <g id="id4">
+        <rect class="BoundingBox" stroke="none" fill="none" x="10461" y="14563" width="204" height="304"/>
+        <path fill="rgb(25,51,0)" stroke="none" d="M 10561,14564 C 10617,14564 10661,14629 10661,14714 10661,14799 10617,14864 10561,14864 10505,14864 10462,14799 10462,14714 10462,14629 10505,14564 10561,14564 Z M 10462,14564 L 10462,14564 Z M 10663,14865 L 10663,14865 Z"/>
+        <path fill="none" stroke="rgb(0,0,0)" d="M 10561,14564 C 10617,14564 10661,14629 10661,14714 10661,14799 10617,14864 10561,14864 10505,14864 10462,14799 10462,14714 10462,14629 10505,14564 10561,14564 Z"/>
+        <path fill="none" stroke="rgb(0,0,0)" d="M 10462,14564 L 10462,14564 Z"/>
+        <path fill="none" stroke="rgb(0,0,0)" d="M 10663,14865 L 10663,14865 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.PolyPolygonShape">
+       <g id="id5">
+        <rect class="BoundingBox" stroke="none" fill="none" x="9535" y="13955" width="1435" height="571"/>
+        <path fill="rgb(28,28,28)" stroke="none" d="M 9536,14525 L 9582,14264 9982,13964 10582,13955 10901,14186 10969,14396 10082,14364 9536,14525 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.CustomShape">
+       <g id="id6">
+        <rect class="BoundingBox" stroke="none" fill="none" x="9632" y="15663" width="1274" height="1404"/>
+        <path fill="rgb(153,0,0)" stroke="none" d="M 9844,15664 C 9738,15664 9633,15769 9633,15875 L 9633,16853 C 9633,16958 9738,17064 9844,17064 L 10692,17064 C 10798,17064 10904,16958 10904,16853 L 10904,15875 C 10904,15769 10798,15664 10692,15664 L 9844,15664 Z M 9633,15664 L 9633,15664 Z M 10904,17065 L 10904,17065 Z"/>
+        <path fill="none" stroke="rgb(52,101,164)" d="M 9844,15664 C 9738,15664 9633,15769 9633,15875 L 9633,16853 C 9633,16958 9738,17064 9844,17064 L 10692,17064 C 10798,17064 10904,16958 10904,16853 L 10904,15875 C 10904,15769 10798,15664 10692,15664 L 9844,15664 Z"/>
+        <path fill="none" stroke="rgb(52,101,164)" d="M 9633,15664 L 9633,15664 Z"/>
+        <path fill="none" stroke="rgb(52,101,164)" d="M 10904,17065 L 10904,17065 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.CustomShape">
+       <g id="id7">
+        <rect class="BoundingBox" stroke="none" fill="none" x="10324" y="16923" width="547" height="927"/>
+        <path fill="rgb(52,101,164)" stroke="none" d="M 10619,17836 L 10369,17848 10325,16949 10824,16924 10869,17823 10619,17836 Z"/>
+        <path fill="none" stroke="rgb(0,0,0)" d="M 10619,17836 L 10369,17848 10325,16949 10824,16924 10869,17823 10619,17836 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.CustomShape">
+       <g id="id8">
+        <rect class="BoundingBox" stroke="none" fill="none" x="10398" y="17784" width="487" height="209"/>
+        <path fill="rgb(51,51,51)" stroke="none" d="M 10432,17791 C 10415,17791 10399,17808 10399,17825 L 10401,17959 C 10401,17975 10418,17991 10435,17991 L 10849,17985 C 10866,17985 10883,17967 10883,17951 L 10881,17817 C 10881,17800 10863,17785 10846,17785 L 10432,17791 Z M 10399,17792 L 10399,17792 Z M 10883,17985 L 10883,17985 Z"/>
+        <path fill="none" stroke="rgb(52,101,164)" d="M 10432,17791 C 10415,17791 10399,17808 10399,17825 L 10401,17959 C 10401,17975 10418,17991 10435,17991 L 10849,17985 C 10866,17985 10883,17967 10883,17951 L 10881,17817 C 10881,17800 10863,17785 10846,17785 L 10432,17791 Z"/>
+        <path fill="none" stroke="rgb(52,101,164)" d="M 10399,17792 L 10399,17792 Z"/>
+        <path fill="none" stroke="rgb(52,101,164)" d="M 10883,17985 L 10883,17985 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.PolyPolygonShape">
+       <g id="id9">
+        <rect class="BoundingBox" stroke="none" fill="none" x="9265" y="15691" width="525" height="1109"/>
+        <path fill="rgb(153,0,0)" stroke="none" d="M 9266,16743 L 9462,15841 9605,15699 9788,15692 9551,16798 9266,16743 Z"/>
+        <path fill="none" stroke="rgb(0,0,0)" d="M 9266,16743 L 9462,15841 9605,15699 9788,15692 9551,16798 9266,16743 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.PolyPolygonShape">
+       <g id="id10">
+        <rect class="BoundingBox" stroke="none" fill="none" x="9251" y="16668" width="326" height="376"/>
+        <path fill="rgb(153,102,51)" stroke="none" d="M 9272,16924 L 9252,16798 9272,16669 9555,16749 9575,16908 9548,16959 9516,16928 9497,17007 9461,17042 9421,17030 9373,17020 9332,16984 9306,16952 9306,16952 9306,16952 9272,16924 Z"/>
+        <path fill="none" stroke="rgb(0,0,0)" d="M 9272,16924 L 9252,16798 9272,16669 9555,16749 9575,16908 9548,16959 9516,16928 9497,17007 9461,17042 9421,17030 9373,17020 9332,16984 9306,16952 9306,16952 9306,16952 9272,16924 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.CustomShape">
+       <g id="id11">
+        <rect class="BoundingBox" stroke="none" fill="none" x="9691" y="16914" width="551" height="929"/>
+        <path fill="rgb(52,101,164)" stroke="none" d="M 9942,17827 L 9692,17814 9741,16915 10240,16942 10191,17841 9942,17827 Z"/>
+        <path fill="none" stroke="rgb(0,0,0)" d="M 9942,17827 L 9692,17814 9741,16915 10240,16942 10191,17841 9942,17827 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.CustomShape">
+       <g id="id12">
+        <rect class="BoundingBox" stroke="none" fill="none" x="9664" y="17762" width="549" height="250"/>
+        <path fill="rgb(51,51,51)" stroke="none" d="M 9713,17766 C 9696,17764 9678,17779 9677,17796 L 9665,17929 C 9664,17945 9678,17963 9695,17965 L 10162,18006 C 10179,18008 10198,17992 10199,17976 L 10211,17843 C 10212,17826 10197,17809 10180,17807 L 9713,17766 Z M 9680,17763 L 9680,17763 Z M 10196,18010 L 10196,18010 Z"/>
+        <path fill="none" stroke="rgb(52,101,164)" d="M 9713,17766 C 9696,17764 9678,17779 9677,17796 L 9665,17929 C 9664,17945 9678,17963 9695,17965 L 10162,18006 C 10179,18008 10198,17992 10199,17976 L 10211,17843 C 10212,17826 10197,17809 10180,17807 L 9713,17766 Z"/>
+        <path fill="none" stroke="rgb(52,101,164)" d="M 9680,17763 L 9680,17763 Z"/>
+        <path fill="none" stroke="rgb(52,101,164)" d="M 10196,18010 L 10196,18010 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.CustomShape">
+       <g id="id13">
+        <rect class="BoundingBox" stroke="none" fill="none" x="9915" y="14564" width="204" height="304"/>
+        <path fill="rgb(25,51,0)" stroke="none" d="M 10015,14565 C 10071,14565 10115,14630 10115,14715 10115,14800 10071,14865 10015,14865 9959,14865 9916,14800 9916,14715 9916,14630 9959,14565 10015,14565 Z M 9916,14565 L 9916,14565 Z M 10117,14866 L 10117,14866 Z"/>
+        <path fill="none" stroke="rgb(0,0,0)" d="M 10015,14565 C 10071,14565 10115,14630 10115,14715 10115,14800 10071,14865 10015,14865 9959,14865 9916,14800 9916,14715 9916,14630 9959,14565 10015,14565 Z"/>
+        <path fill="none" stroke="rgb(0,0,0)" d="M 9916,14565 L 9916,14565 Z"/>
+        <path fill="none" stroke="rgb(0,0,0)" d="M 10117,14866 L 10117,14866 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id14">
+        <rect class="BoundingBox" stroke="none" fill="none" x="9764" y="15125" width="1089" height="367"/>
+        <path fill="none" stroke="rgb(0,0,0)" stroke-width="100" stroke-linejoin="round" d="M 10802,15176 C 10796,15221 10776,15259 10736,15299 10690,15344 10633,15377 10554,15403 10474,15429 10396,15441 10305,15441 10213,15441 10135,15429 10055,15403 9976,15377 9919,15344 9873,15299 9843,15270 9826,15242 9815,15209"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.CustomShape">
+       <g id="id15">
+        <rect class="BoundingBox" stroke="none" fill="none" x="10191" y="14842" width="208" height="268"/>
+        <path fill="rgb(153,102,51)" stroke="none" d="M 10192,15108 L 10397,15108 10355,14843 10233,14843 10192,15108 10192,15108 Z M 10192,15108 L 10192,15108 Z M 10397,14843 L 10397,14843 Z"/>
+        <path fill="none" stroke="rgb(0,0,0)" d="M 10192,15108 L 10397,15108 10355,14843 10233,14843 10192,15108 10192,15108 Z"/>
+        <path fill="none" stroke="rgb(0,0,0)" d="M 10192,15108 L 10192,15108 Z"/>
+        <path fill="none" stroke="rgb(0,0,0)" d="M 10397,14843 L 10397,14843 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.PolyPolygonShape">
+       <g id="id16">
+        <rect class="BoundingBox" stroke="none" fill="none" x="10751" y="15691" width="525" height="1109"/>
+        <path fill="rgb(153,0,0)" stroke="none" d="M 11274,16743 L 11078,15841 10935,15699 10752,15692 10989,16798 11274,16743 Z"/>
+        <path fill="none" stroke="rgb(0,0,0)" d="M 11274,16743 L 11078,15841 10935,15699 10752,15692 10989,16798 11274,16743 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.PolyPolygonShape">
+       <g id="id17">
+        <rect class="BoundingBox" stroke="none" fill="none" x="10964" y="16668" width="326" height="376"/>
+        <path fill="rgb(153,102,51)" stroke="none" d="M 11268,16924 L 11288,16798 11268,16669 10985,16749 10965,16908 10992,16959 11024,16928 11042,17006 11079,17042 11119,17030 11167,17020 11208,16984 11234,16952 11234,16952 11234,16952 11268,16924 Z"/>
+        <path fill="none" stroke="rgb(0,0,0)" d="M 11268,16924 L 11288,16798 11268,16669 10985,16749 10965,16908 10992,16959 11024,16928 11042,17006 11079,17042 11119,17030 11167,17020 11208,16984 11234,16952 11234,16952 11234,16952 11268,16924 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.CustomShape">
+       <g id="id18">
+        <rect class="BoundingBox" stroke="none" fill="none" x="9453" y="15719" width="1706" height="1297"/>
+        <defs>
+         <clipPath id="clip_path_1" clipPathUnits="userSpaceOnUse">
+          <path d="M 10305,17014 L 9454,17014 9454,15720 11157,15720 11157,17014 10305,17014 Z"/>
+         </clipPath>
+        </defs>
+        <g clip-path="url(#clip_path_1)">
+         <image x="9140" y="15625" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="9352" y="15625" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="9564" y="15625" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="9776" y="15625" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="9988" y="15625" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="10200" y="15625" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="10412" y="15625" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="10624" y="15625" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="10836" y="15625" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="11048" y="15625" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="9352" y="15837" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="9564" y="15837" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="9776" y="15837" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="9988" y="15837" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="10200" y="15837" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="10412" y="15837" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="10624" y="15837" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="10836" y="15837" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="11048" y="15837" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="9140" y="16049" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="9352" y="16049" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="9564" y="16049" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="9776" y="16049" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="9988" y="16049" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="10200" y="16049" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="10412" y="16049" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="10624" y="16049" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="10836" y="16049" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="11048" y="16049" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="9352" y="16261" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="9564" y="16261" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="9776" y="16261" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="9988" y="16261" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="10200" y="16261" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="10412" y="16261" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="10624" y="16261" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="10836" y="16261" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="11048" y="16261" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="9140" y="16473" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="9352" y="16473" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="9564" y="16473" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="9776" y="16473" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="9988" y="16473" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="10200" y="16473" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="10412" y="16473" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="10624" y="16473" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="10836" y="16473" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="11048" y="16473" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="9352" y="16685" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="9564" y="16685" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="9776" y="16685" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="9988" y="16685" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="10200" y="16685" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="10412" y="16685" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="10624" y="16685" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="10836" y="16685" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="11048" y="16685" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="9140" y="16897" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="9352" y="16897" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="9564" y="16897" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="9776" y="16897" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="9988" y="16897" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="10200" y="16897" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="10412" y="16897" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="10624" y="16897" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="10836" y="16897" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+         <image x="11048" y="16897" width="212" height="212" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEXz6rQAAADGFdTLAAAAFklEQVR4nGNwYFBgcGBgYGBiYAFiBgAIWACpMQYK2wAAAABJRU5ErkJggg=="/>
+        </g>
+        <path fill="none" stroke="rgb(52,101,164)" d="M 10306,17014 L 9454,17014 9454,15720 11157,15720 11157,17014 10306,17014 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.CustomShape">
+       <g id="id19">
+        <rect class="BoundingBox" stroke="none" fill="none" x="9889" y="16067" width="114" height="537"/>
+        <path fill="rgb(114,159,207)" stroke="none" d="M 9945,16068 C 9976,16068 10000,16183 10000,16334 10000,16485 9976,16601 9945,16601 9914,16601 9890,16485 9890,16334 9890,16183 9914,16068 9945,16068 Z M 9890,16068 L 9890,16068 Z M 10001,16602 L 10001,16602 Z"/>
+        <path fill="none" stroke="rgb(52,101,164)" d="M 9945,16068 C 9976,16068 10000,16183 10000,16334 10000,16485 9976,16601 9945,16601 9914,16601 9890,16485 9890,16334 9890,16183 9914,16068 9945,16068 Z"/>
+        <path fill="none" stroke="rgb(52,101,164)" d="M 9890,16068 L 9890,16068 Z"/>
+        <path fill="none" stroke="rgb(52,101,164)" d="M 10001,16602 L 10001,16602 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.CustomShape">
+       <g id="id20">
+        <rect class="BoundingBox" stroke="none" fill="none" x="10390" y="16067" width="114" height="537"/>
+        <path fill="rgb(114,159,207)" stroke="none" d="M 10446,16068 C 10477,16068 10501,16183 10501,16334 10501,16485 10477,16601 10446,16601 10415,16601 10391,16485 10391,16334 10391,16183 10415,16068 10446,16068 Z M 10391,16068 L 10391,16068 Z M 10502,16602 L 10502,16602 Z"/>
+        <path fill="none" stroke="rgb(52,101,164)" d="M 10446,16068 C 10477,16068 10501,16183 10501,16334 10501,16485 10477,16601 10446,16601 10415,16601 10391,16485 10391,16334 10391,16183 10415,16068 10446,16068 Z"/>
+        <path fill="none" stroke="rgb(52,101,164)" d="M 10391,16068 L 10391,16068 Z"/>
+        <path fill="none" stroke="rgb(52,101,164)" d="M 10502,16602 L 10502,16602 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.OpenBezierShape">
+       <g id="id21">
+        <rect class="BoundingBox" stroke="none" fill="none" x="9626" y="15878" width="749" height="640"/>
+        <path fill="none" stroke="rgb(255,102,0)" stroke-width="50" stroke-linejoin="round" d="M 9651,16087 C 9804,16024 10112,15697 10165,16106 L 10276,16308 10349,16491"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.OpenBezierShape">
+       <g id="id22">
+        <rect class="BoundingBox" stroke="none" fill="none" x="9516" y="16301" width="1246" height="621"/>
+        <path fill="none" stroke="rgb(255,102,0)" stroke-width="50" stroke-linejoin="round" d="M 10735,16326 C 10682,16582 10428,16691 10239,16822 10069,16940 9845,16874 9652,16859 L 9541,16896"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.OpenBezierShape">
+       <g id="id23">
+        <rect class="BoundingBox" stroke="none" fill="none" x="10379" y="15879" width="805" height="768"/>
+        <path fill="none" stroke="rgb(255,102,0)" stroke-width="50" stroke-linejoin="round" d="M 10405,15904 C 10541,16108 10765,16258 10827,16510 L 11011,16620 11084,16436 11158,16436"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.CustomShape">
+       <g id="id24">
+        <rect class="BoundingBox" stroke="none" fill="none" x="9479" y="16375" width="310" height="456"/>
+        <path fill="rgb(255,255,102)" stroke="none" d="M 9633,16400 C 9706,16400 9762,16488 9762,16602 9762,16716 9706,16804 9633,16804 9560,16804 9504,16716 9504,16602 9504,16488 9560,16400 9633,16400 Z M 9504,16400 L 9504,16400 Z M 9763,16805 L 9763,16805 Z"/>
+        <path fill="none" stroke="rgb(204,153,0)" stroke-width="50" stroke-linejoin="round" d="M 9633,16400 C 9706,16400 9762,16488 9762,16602 9762,16716 9706,16804 9633,16804 9560,16804 9504,16716 9504,16602 9504,16488 9560,16400 9633,16400 Z"/>
+       </g>
+      </g>
+     </g>
+    </g>
+   </g>
+  </g>
+ </g>
+</svg>

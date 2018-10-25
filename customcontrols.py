@@ -11,3 +11,7 @@ class CustomControls:
     
     def mouse_click (self,pos):
         pass
+    
+    
+    def refresh(self):
+        pass

@@ -35,7 +35,10 @@ ICON = "icon.png"
 #All must have 4 images ending with 1 to 4, except for jump and duck which only ends with 1
 # 'down', 'up', 'left', 'right', 'jump', 'duck'
 #For this game jump is used, but is represented as reading a map
-PLAYER_IMG_FORMAT = "person_{}_{:02d}_{}_{:02d}"
+# PLAYER_TEXT_IMG_FORMAT - formats strings, PLAYER_TEXT_FORMAT is the same, but converts numbers for 2nd and 4th entries
+PLAYER_TEXT_IMG_FORMAT = "person_{}_{}_{}_{}"
+# Technically not a constant, but won't change after this.
+PLAYER_IMG_FORMAT = PLAYER_TEXT_IMG_FORMAT.format("{}","{:02d}","{}","{:02d}")  
 # Same background can be applied for each level or one per level - if only some have backgrounds then the last one is used for all subsequent levels 
 # background 00 is used by the menu
 # eg. person_default_01_forward_01
@@ -91,7 +94,7 @@ west_box = Rect((0, 0), (box_size, HEIGHT))
 # These are used for the menu sub commands - must be classes
 # Must implement show() display() mouse_move() and mouse_click()
 sub_commands = {
-    'character' : CustomCharacter(),
+    'character' : CustomCharacter(PLAYER_TEXT_IMG_FORMAT),
     'controls' : CustomControls(),
     'highscore' : high_score
 }
