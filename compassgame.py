@@ -61,7 +61,7 @@ action_text = {'north':'Go north', 'south':'Go south',
 
 
 # allows different character looks
-theme = "default"
+theme = "person1"
 theme_num = 0
 
 
