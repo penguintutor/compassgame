@@ -7,6 +7,7 @@ from timer import Timer
 # Directories relative to the application directory
 THEME_DIR = "themes/"
 IMAGE_DIR = "images/"             # This is fixed for pgzero files
+TEMP_DIR = "tmp/"                 # Use to create svgs before creating the png files
 
 CONVERT_CMD = "/usr/bin/convert"
 
@@ -18,11 +19,21 @@ class CustomCharacter:
     current_theme_actors = []
     available_theme_actors = []
     
-    available_themes = []
     current_themes = []    # Stores tuple with theme and variation number - eg. (person1,2)
+    available_themes = []
     
-    current_actor_ypos = 160
+    
+    current_actor_ypos = 220
     custom_actor_ypos = 460
+    
+    # Are we on top row (0 = current_characters) or bottom row (1 = customize characters) 
+    selected_row = 0
+    # position of selection on the x axis
+    selected_col = 0
+    
+    # Default theme must be valid
+    theme = "person1"
+    theme_num = 0
 
     def __init__ (self, img_file_format):
         self.img_file_format = img_file_format
@@ -35,14 +46,14 @@ class CustomCharacter:
         # Load the themes - only look in the SVG folder
         theme_regexp_string = img_file_format.format("([a-zA-Z0-9]+)", "00", "down", "01")+".svg"
         theme_regexp = re.compile(theme_regexp_string)
+        xpos = 100
         for file in listdir(THEME_DIR):
             matches = theme_regexp.match(file)
-            xpos = 100
             if (matches != None):
                 # uses group(0) for full filename, group(1) for theme name
                 self.available_themes.append(matches.group(1))
                 # Add default image (theme 00 down 01) as actor
-                self.available_theme_actors.append(Actor(img_file_format.format(matches.group(1), "00", "down", "01")+".png", (xpos,self.custom_actor_ypos)))
+                self.available_theme_actors.append(Actor(img_file_format.format(matches.group(1), "00", "down", "01"), (xpos,self.custom_actor_ypos)))
                 xpos += 100
                 
         # Load the different variations on the themes currently available
@@ -54,7 +65,7 @@ class CustomCharacter:
             if (matches != None):
                 # uses group(0) for full filename, group(1) for theme name
                 self.current_themes.append((matches.group(1),int(matches.group(2))))
-                self.current_theme_actors.append(Actor(img_file_format.format(matches.group(1), matches.group(2), "down", "01")+".png", (xpos,self.current_actor_ypos)))
+                self.current_theme_actors.append(Actor(img_file_format.format(matches.group(1), matches.group(2), "down", "01"), (xpos,self.current_actor_ypos)))
                 xpos += 100
             
         
@@ -67,16 +78,52 @@ class CustomCharacter:
         for i in range (0,len(self.current_theme_actors)):
             self.current_theme_actors[i].draw()
             
-        screen.draw.text('Customize Character', fontsize=40, center=(400,400), shadow=(1,1), color=(255,255,255), scolor="#202020")      
+        screen.draw.text('Customize Character', fontsize=40, center=(400,340), shadow=(1,1), color=(255,255,255), scolor="#202020")      
         for i in range (0,len(self.available_theme_actors)):
             self.available_theme_actors[i].draw()
+            
+        # Draw a box around the current character
+        # Get a rect same pos as character
+        if (self.selected_row == 0):
+            highlight_rect = self.current_theme_actors[self.selected_col].copy()
+        elif (self.selected_row == 1):
+            highlight_rect = self.available_theme_actors[self.selected_col].copy()
+            
+        screen.draw.rect(highlight_rect, (255,255,255))
         
     
     def update(self, keyboard):
         if (self.pause_timer.getTimeRemaining() > 0):
             return
+        if (keyboard.up):
+            self.selected_row = 0
+            self.selected_col = self.checkColPos(self.selected_col, self.selected_row)
+        if (keyboard.down):
+            self.selected_row = 1
+            self.selected_col = self.checkColPos(self.selected_col, self.selected_row)
+        if (keyboard.right):
+            self.selected_col = self.checkColPos(self.selected_col + 1, self.selected_row)
+        if (keyboard.left):
+            self.selected_col = self.checkColPos(self.selected_col - 1, self.selected_row)
         if (keyboard.space or keyboard.lshift or keyboard.rshift or keyboard.lctrl or keyboard.RETURN):
+            # If pressed on top row then update theme
+            if (self.selected_row == 0):
+                (self.theme, self.theme_num) = self.current_themes[self.selected_col]
             return 'menu'
+    
+    # Checks to see if col is too far left or right and returns nearest safe pos
+    def checkColPos (self, col_pos, row_pos):
+        # Too far left is same either case return 0
+        if (col_pos < 0): 
+            return 0
+        # Top row
+        if (row_pos == 0):
+            if (col_pos >= len(self.current_themes)):
+                return (len(self.current_themes) -1)
+        elif (row_pos == 1):
+            if (col_pos >= len(self.available_themes)):
+                return (len(self.available_themes) -1)
+        return col_pos
     
     def mouse_move (self,po):
         pass
@@ -86,3 +133,7 @@ class CustomCharacter:
     
     def select(self):
         self.pause_timer.startCountDown()
+        
+        
+    def getTheme(self):
+        return (self.theme, self.theme_num)

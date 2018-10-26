@@ -120,6 +120,12 @@ class PlayerActor(Actor):
         self.direction = new_direction
         self.player_step_position = math.floor(self.player_step_count / self.step_delay) +1
         self.image = self.getImage()
+        
+    # Theme and theme_num must be a tuple (which is what CustomCharacter.getTheme() returns) 
+    def setTheme(self, theme_tuple):
+        self.theme = theme_tuple[0]
+        self.theme_num = theme_tuple[1]
+        self.updImage("down")
 
     def reset(self):
         self.score = 0

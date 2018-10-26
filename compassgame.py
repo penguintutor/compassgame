@@ -60,17 +60,25 @@ action_text = {'north':'Go north', 'south':'Go south',
     'duck':'Quick duck!', 'jump':'Check the map'}
 
 
-# allows different character looks
-theme = "person1"
-theme_num = 0
-
-
-
 # Track Status etc
 game_status = GamePlay(action_text)
 
 # Track high score
 high_score = HighScore(HIGH_SCORE_FILENAME)
+
+# These are used for the menu sub commands - must be classes
+# Must implement show() display() mouse_move() and mouse_click() select()
+sub_commands = {
+    'character' : CustomCharacter(PLAYER_TEXT_IMG_FORMAT),
+    'controls' : CustomControls(),
+    'highscore' : high_score
+}
+
+
+
+# allows different character looks - must come after the sub_commands are defined
+(theme, theme_num) = sub_commands['character'].getTheme()
+
 
 # Player - baseed on PlayActor which inherits from Actor
 player = PlayerActor(theme, theme_num, PLAYER_IMG_FORMAT, WIDTH,HEIGHT)
@@ -91,13 +99,7 @@ east_box = Rect((WIDTH-box_size, 0), (WIDTH, HEIGHT))
 south_box = Rect((0, HEIGHT-box_size), (WIDTH, HEIGHT))
 west_box = Rect((0, 0), (box_size, HEIGHT))
 
-# These are used for the menu sub commands - must be classes
-# Must implement show() display() mouse_move() and mouse_click()
-sub_commands = {
-    'character' : CustomCharacter(PLAYER_TEXT_IMG_FORMAT),
-    'controls' : CustomControls(),
-    'highscore' : high_score
-}
+
 
 
 
@@ -179,6 +181,8 @@ def update():
         result = sub_commands[game_status.getSubCommand()].update(keyboard)
         if result == 'menu':
             game_status.setMenu()
+            # Update any settings that may have changed
+            refreshSettings()
         return
     
     
@@ -363,5 +367,8 @@ def get_background_img(game_level):
     return BACKGROUND_IMG_FORMAT.format(game_level)
     
 
+# Update any settings that may have changed during a menu operation
+def refreshSettings():
+    player.setTheme(sub_commands['character'].getTheme())
     
     
