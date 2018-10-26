@@ -37,8 +37,8 @@ ICON = "icon.png"
 #For this game jump is used, but is represented as reading a map
 # PLAYER_TEXT_IMG_FORMAT - formats strings, PLAYER_TEXT_FORMAT is the same, but converts numbers for 2nd and 4th entries
 PLAYER_TEXT_IMG_FORMAT = "person_{}_{}_{}_{}"
-# Technically not a constant, but won't change after this.
-PLAYER_IMG_FORMAT = PLAYER_TEXT_IMG_FORMAT.format("{}","{:02d}","{}","{:02d}")  
+# Not a constant, but won't change after this.
+player_img_format = PLAYER_TEXT_IMG_FORMAT.format("{}","{:02d}","{}","{:02d}")  
 # Same background can be applied for each level or one per level - if only some have backgrounds then the last one is used for all subsequent levels 
 # background 00 is used by the menu
 # eg. person_default_01_forward_01
@@ -81,7 +81,7 @@ sub_commands = {
 
 
 # Player - baseed on PlayActor which inherits from Actor
-player = PlayerActor(theme, theme_num, PLAYER_IMG_FORMAT, WIDTH,HEIGHT)
+player = PlayerActor(theme, theme_num, player_img_format, WIDTH,HEIGHT)
 
 
 #Obstacles - these are actors, but stationary ones - default positions
@@ -183,6 +183,7 @@ def update():
             game_status.setMenu()
             # Update any settings that may have changed
             refreshSettings()
+        # Any other return and we stay where we are
         return
     
     

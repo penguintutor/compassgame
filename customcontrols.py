@@ -12,6 +12,6 @@ class CustomControls:
     def mouse_click (self,pos):
         pass
     
-    
-    def refresh(self):
-        pass
+
+    def select(self):
+        self.pause_timer.startCountDown()

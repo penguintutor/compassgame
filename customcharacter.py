@@ -80,6 +80,19 @@ class CustomCharacter:
         
 
     def draw(self, screen):
+        if (self.status == STATUS_MAIN):
+            self.drawMain(screen)
+        elif (self.status == STATUS_CUSTOM):
+            self.drawCustom(screen)
+        
+    def drawCustom(self, screen):
+        screen.blit(self.background_img, (0,0))
+        screen.draw.text('Customize Character', fontsize=60, center=(450,50), shadow=(1,1), color=(255,255,255), scolor="#202020")
+        self.preview.draw()
+        
+          
+        
+    def drawMain(self, screen):
         screen.blit(self.background_img, (0,0))
         screen.draw.text('Custom Character', fontsize=60, center=(400,50), shadow=(1,1), color=(255,255,255), scolor="#202020")
         
@@ -104,19 +117,30 @@ class CustomCharacter:
     def update(self, keyboard):
         if (self.pause_timer.getTimeRemaining() > 0):
             return
+        # Control main screen
         if (self.status == STATUS_MAIN):
+            # returns whatever updateMain returns - None if still in selection or menu if theme updated
             return self.updateMain(keyboard)
         elif (self.status == STATUS_CUSTOM):
-            return "menu"
+            self.status = self.updateCustom(keyboard)
+            if (self.status == STATUS_MAIN):
+                self.pause_timer.startCountDown()
+            return
         # If mouse clicked
         elif (self.status == STATUS_CLICKED):
+            self.status = STATUS_MAIN
             if (self.selected_row == 0):
                 (self.theme, self.theme_num) = self.current_themes[self.selected_col]
             return 'menu'
         else:
             return
             
-            
+    # Update on customize screen
+    def updateCustom(self, keyboard):
+        if (keyboard.space or keyboard.lshift or keyboard.rshift or keyboard.lctrl or keyboard.RETURN):
+            return STATUS_MAIN
+        else:
+            return STATUS_CUSTOM
             
     # Update main screen
     def updateMain(self, keyboard):
@@ -134,6 +158,10 @@ class CustomCharacter:
             # If pressed on top row then update theme
             if (self.selected_row == 0):
                 (self.theme, self.theme_num) = self.current_themes[self.selected_col]
+            elif (self.selected_row == 1):
+                self.customize_theme = self.available_themes[self.selected_col]
+                self.status = STATUS_CUSTOM
+                self.preview = Actor (self.img_file_format.format(self.customize_theme, "00", "down", "01"), (700,150)) 
             return 'menu'
     
     # Checks to see if col is too far left or right and returns nearest safe pos
@@ -154,6 +182,9 @@ class CustomCharacter:
         pass
     
     def mouse_click (self,pos):
+        if (self.pause_timer.getTimeRemaining() > 0):
+            return
+        self.pause_timer.startCountDown()
         if (self.status == STATUS_MAIN):
             # cycle through different images checking for collision
             for i in range (0,len(self.current_theme_actors)):
