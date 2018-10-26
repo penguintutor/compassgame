@@ -9,6 +9,12 @@ THEME_DIR = "themes/"
 IMAGE_DIR = "images/"             # This is fixed for pgzero files
 TEMP_DIR = "tmp/"                 # Use to create svgs before creating the png files
 
+# Track state for the display 
+# 'main' is the main page, 'custom' is used to choose custom colours, 'clicked' used to handle mouse click
+STATUS_MAIN = 0
+STATUS_CUSTOM = 1
+STATUS_CLICKED = 2
+
 CONVERT_CMD = "/usr/bin/convert"
 
 class CustomCharacter:
@@ -34,6 +40,9 @@ class CustomCharacter:
     # Default theme must be valid
     theme = "person1"
     theme_num = 0
+    
+    
+    status = STATUS_MAIN
 
     def __init__ (self, img_file_format):
         self.img_file_format = img_file_format
@@ -95,6 +104,22 @@ class CustomCharacter:
     def update(self, keyboard):
         if (self.pause_timer.getTimeRemaining() > 0):
             return
+        if (self.status == STATUS_MAIN):
+            return self.updateMain(keyboard)
+        elif (self.status == STATUS_CUSTOM):
+            return "menu"
+        # If mouse clicked
+        elif (self.status == STATUS_CLICKED):
+            if (self.selected_row == 0):
+                (self.theme, self.theme_num) = self.current_themes[self.selected_col]
+            return 'menu'
+        else:
+            return
+            
+            
+            
+    # Update main screen
+    def updateMain(self, keyboard):
         if (keyboard.up):
             self.selected_row = 0
             self.selected_col = self.checkColPos(self.selected_col, self.selected_row)
@@ -125,11 +150,27 @@ class CustomCharacter:
                 return (len(self.available_themes) -1)
         return col_pos
     
-    def mouse_move (self,po):
+    def mouse_move (self,pos):
         pass
     
     def mouse_click (self,pos):
-        pass
+        if (self.status == STATUS_MAIN):
+            # cycle through different images checking for collision
+            for i in range (0,len(self.current_theme_actors)):
+                if (self.current_theme_actors[i].collidepoint(pos)):
+                    self.selected_row = 0
+                    self.selected_col = i
+                    self.status = STATUS_CLICKED
+                    return
+            for i in range (0,len(self.available_theme_actors)):
+                if (self.available_theme_actors[i].collidepoint(pos)):
+                    self.selected_row = 1
+                    self.selected_col = i
+                    self.status = STATUS_CLICKED
+                    return
+            
+    
+   
     
     def select(self):
         self.pause_timer.startCountDown()

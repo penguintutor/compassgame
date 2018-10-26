@@ -244,6 +244,9 @@ def on_mouse_down(pos, button):
         game_status.setMenu()
         # Reset number of obstacles etc.
         set_level_display(game_status.getLevel())
+    # If sub command pass on to command
+    if (game_status.isSubCommand()):
+        sub_commands[game_status.getSubCommand()].mouse_click(pos)
         
 
             
