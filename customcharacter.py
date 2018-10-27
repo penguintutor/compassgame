@@ -162,6 +162,8 @@ class CustomCharacter:
                 self.customize_theme = self.available_themes[self.selected_col]
                 self.status = STATUS_CUSTOM
                 self.preview = Actor (self.img_file_format.format(self.customize_theme, "00", "down", "01"), (700,150)) 
+                self.pause_timer.startCountDown()
+                return 'character'
             return 'menu'
     
     # Checks to see if col is too far left or right and returns nearest safe pos
