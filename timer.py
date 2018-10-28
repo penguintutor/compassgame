@@ -24,6 +24,11 @@ class Timer():
             self.set_time = new_time
         self.start_time = time.time()
         self.printDebug("Timer started")
+        
+    # Set count down to expired by setting start time in the past
+    def expireCountDown(self):
+        self.start_time = time.time() - self.set_time
+
 
     # Returns time remaining note full accuracy - if need only seconds use math.floor
     def getTimeRemaining(self):

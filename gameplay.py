@@ -197,9 +197,13 @@ class GamePlay:
         return self.game_timer.getTimeRemaining()
         
         
-    def setMenu(self):
+    def setMenu(self, first_run = False):
         self.status = STATUS_MENU_START
-        self.timer_pause.startCountDown()
+        # If first run then don't use timer so can move cursor straight away
+        if (first_run):
+            self.timer_pause.expireCountDown()
+        else:
+            self.timer_pause.startCountDown()
         
     def isMenu(self):
         if (self.status >= STATUS_MENU_START and self.status <= STATUS_MENU_END):

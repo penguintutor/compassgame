@@ -155,7 +155,8 @@ def update():
     game_status.setGameMessage("")
     
     if game_status.isTitleScreen():
-        game_status.setMenu()
+        # first_run prevents timer
+        game_status.setMenu(first_run = True)
         
     
     # Call menu update function, if return is not 0 then continue with rest of updates
