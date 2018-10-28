@@ -1,8 +1,11 @@
 import re
+#import yaml
 from os import listdir
 from pgzero.actor import Actor
+from pgzero.rect import Rect
 
 from timer import Timer
+from themedetails import ThemeDetails
 
 # Directories relative to the application directory
 THEME_DIR = "themes/"
@@ -14,6 +17,8 @@ TEMP_DIR = "tmp/"                 # Use to create svgs before creating the png f
 STATUS_MAIN = 0
 STATUS_CUSTOM = 1
 STATUS_CLICKED = 2
+
+
 
 CONVERT_CMD = "/usr/bin/convert"
 
@@ -40,6 +45,9 @@ class CustomCharacter:
     # Default theme must be valid
     theme = "person1"
     theme_num = 0
+    
+    # Class to hold details of theme from config file
+    theme_config = ThemeDetails(THEME_DIR)
     
     
     status = STATUS_MAIN
@@ -88,7 +96,20 @@ class CustomCharacter:
     def drawCustom(self, screen):
         screen.blit(self.background_img, (0,0))
         screen.draw.text('Customize Character', fontsize=60, center=(450,50), shadow=(1,1), color=(255,255,255), scolor="#202020")
-        self.preview.draw()
+        if (not self.theme_config.isThemeLoaded):
+            screen.draw.text('No config found for this theme, please choose a different theme', fontsize=40, topleft=(100,150), color=(255,0,0))
+            return
+        ypos = 100
+        list_keys = self.theme_config.getKeys()
+        #theme_dict = self.theme_config.getLabels()
+        #for key in theme_dict.keys():
+        for i in range(0,len(list_keys)):
+            key = list_keys[i]
+            screen.draw.text(self.theme_config.getLabel(key), fontsize=30, topleft=(100,ypos), color=(0,0,0))
+            screen.draw.filled_rect(Rect((300,ypos),(20,20)), self.theme_config.getColour(key))
+            ypos += 50
+        
+        self.preview.draw()                                                    
         
           
         
@@ -162,9 +183,12 @@ class CustomCharacter:
                 self.customize_theme = self.available_themes[self.selected_col]
                 self.status = STATUS_CUSTOM
                 self.preview = Actor (self.img_file_format.format(self.customize_theme, "00", "down", "01"), (700,150)) 
+                self.theme_config.loadConfig(self.customize_theme)
                 self.pause_timer.startCountDown()
                 return 'character'
             return 'menu'
+            
+    
     
     # Checks to see if col is too far left or right and returns nearest safe pos
     def checkColPos (self, col_pos, row_pos):
