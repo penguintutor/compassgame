@@ -1,5 +1,5 @@
 import re
-#import yaml
+import os
 from os import listdir
 from pgzero.actor import Actor
 from pgzero.rect import Rect
@@ -242,7 +242,14 @@ class CustomCharacter:
             elif (self.selected_colour_custom > -1):
                 return STATUS_MAIN
             else:
-                #### Save the entry
+                file_num = self.findNextNumber(self.customize_theme)
+                # Should only get this if over 100 entries for this theme
+                # so hopefully never - just returns back to the main customize screen, but prints to console (same as cancel)
+                if (file_num == 0):
+                    print ("Unable to find next number for save file")
+                    return STATUS_MAIN
+                else: 
+                    print ("Next entry is "+str(file_num))
                 #Todo
                 return STATUS_CUSTOM
         else:
@@ -264,7 +271,12 @@ class CustomCharacter:
             # If pressed on top row then update theme
             if (self.selected_row == 0):
                 (self.theme, self.theme_num) = self.current_themes[self.selected_col]
+            # If pressed on second row then customize theme
             elif (self.selected_row == 1):
+                # Reset position
+                self.selected_row_custom = 0
+                self.selected_colour_custom = -1
+                
                 self.customize_theme = self.available_themes[self.selected_col]
                 self.status = STATUS_CUSTOM
                 self.preview = Actor (self.img_file_format.format(self.customize_theme, "00", "down", "01"), (700,150)) 
@@ -320,3 +332,16 @@ class CustomCharacter:
         
     def getTheme(self):
         return (self.theme, self.theme_num)
+        
+        
+    # Get next available number for this theme
+    # Iterates through permutations of files looking for next one that doesn't exist
+    def findNextNumber(self,theme):
+        # create new format string with just number missing - needs .png extension
+        player_img_format_num = IMAGE_DIR+self.img_file_format.format(theme,"{:02d}","down","01")+".png" 
+        # Check for this incrementing one each time
+        for i in range (1,100):
+            if (not os.path.isfile(player_img_format_num.format(i))):
+                return i
+        # Unlikely to ever reach this - 100 entries for a single theme
+        return 0

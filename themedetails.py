@@ -26,6 +26,15 @@ class ThemeDetails:
     
     # Loads colour config file for person
     def loadConfig (self, theme):
+        self.theme = theme
+        
+        # Reset all these entries to prevent loading alongside existing
+        self.keys=[]
+        self.about={}
+        self.default_colours={}
+        self.labels={}
+        self.colour_options={}
+        
         try :
             filename = self.theme_dir+CFG_FILE_FORMAT.format(theme)
             
@@ -64,6 +73,10 @@ class ThemeDetails:
                 
     def isThemeLoaded(self):
         return self.theme_loaded
+        
+        
+    def getTheme(self):
+        return self.theme
                 
     # Returns dict of short label = full string
     def getLabels(self):
