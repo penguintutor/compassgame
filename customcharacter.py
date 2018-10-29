@@ -42,6 +42,12 @@ class CustomCharacter:
     # position of selection on the x axis
     selected_col = 0
     
+    # Which row is selected when creating a custom entry
+    selected_row_custom = 0
+    # which colour col pos is selected (-1 = none)
+    selected_colour_custom = -1
+    
+    
     # Default theme must be valid
     theme = "person1"
     theme_num = 0
@@ -57,8 +63,8 @@ class CustomCharacter:
         # Create a regular expression to identify themes
         # does not use \w as do not include _ character
         # Look for image 0 (down 1) - other variants of the first number part is different colours
-        # Timer restrict keyboard movements to every 1/2 second (prevent multiple presses)
-        self.pause_timer = Timer(0.25)
+        # Timer restrict keyboard movements to fraction of second to prevent multiple presses
+        self.pause_timer = Timer(0.15)
         
         # Load the themes - only look in the SVG folder
         theme_regexp_string = img_file_format.format("([a-zA-Z0-9]+)", "00", "down", "01")+".svg"
@@ -95,26 +101,69 @@ class CustomCharacter:
         
     def drawCustom(self, screen):
         screen.blit(self.background_img, (0,0))
-        screen.draw.text('Customize Character', fontsize=60, center=(450,50), shadow=(1,1), color=(255,255,255), scolor="#202020")
+        screen.draw.text('Customize Character', fontsize=60, center=(400,50), shadow=(1,1), color=(255,255,255), scolor="#202020")
         if (not self.theme_config.isThemeLoaded):
             screen.draw.text('No config found for this theme, please choose a different theme', fontsize=40, topleft=(100,150), color=(255,0,0))
             return
         ypos = 100
         list_keys = self.theme_config.getKeys()
-        #theme_dict = self.theme_config.getLabels()
-        #for key in theme_dict.keys():
         for i in range(0,len(list_keys)):
             key = list_keys[i]
             screen.draw.text(self.theme_config.getLabel(key), fontsize=30, topleft=(100,ypos), color=(0,0,0))
-            screen.draw.filled_rect(Rect((300,ypos),(20,20)), self.theme_config.getColour(key))
+            if (i == self.selected_row_custom):
+                if (self.selected_colour_custom == -1):
+                    self.drawColourBox(screen, True, self.theme_config.getColour(key), 300, ypos)
+                else:
+                    self.drawColourBox(screen, False, self.theme_config.getColour(key), 300, ypos)
+                # If a row selected then show colour options
+                self.showColourOptions (screen, key, 350, ypos)
+            else:
+                self.drawColourBox(screen, False, self.theme_config.getColour(key), 300, ypos)
             ypos += 50
-        
+        # Add OK / Cancel buttons
+        if (self.selected_row_custom == self.theme_config.numKeys() and self.selected_colour_custom == -1):
+            screen.draw.text('Save', fontsize=30, center=(150,500), color=(0,0,0), background=(255,255,255))
+        else:
+            screen.draw.text('Save', fontsize=30, center=(150,500), color=(0,0,0))
+        if (self.selected_row_custom == self.theme_config.numKeys() and self.selected_colour_custom > -1):
+            screen.draw.text('Cancel', fontsize=30, center=(300,500), color=(0,0,0), background=(255,255,255))
+        else:
+            screen.draw.text('Cancel', fontsize=30, center=(300,500), color=(0,0,0))
         self.preview.draw()                                                    
         
-          
+    # Draws box, if selected = True includes highlight 
+    # x, y pos is the box without highlighting - with highligting it will be -2 from that value
+    def drawColourBox(self, screen, selected, colour, xpos, ypos):
+        if (selected):
+            # If cursor is on this position (-1) then highlight current colour
+            # Higlight with black and white so it will contrast with either colour
+            screen.draw.filled_rect(Rect((xpos,ypos),(24,24)), (0,0,0))
+            screen.draw.filled_rect(Rect((xpos-2,ypos-2),(24,24)), (255,255,255))
+        screen.draw.filled_rect(Rect((xpos,ypos),(20,20)), colour )
+        
+        
+    # Shows the available colours - part is what part of body / clothing
+    def showColourOptions(self, screen, part, xpos, ypos):
+        colour_options = self.theme_config.getColourOptions(part)
+        for i in range(0,len(colour_options)):
+            if (i == self.selected_colour_custom):
+                self.drawColourBox(screen, True, colour_options[i], xpos+(25*i), ypos)
+            else:
+                self.drawColourBox(screen, False, colour_options[i], xpos+(25*i), ypos)
         
     def drawMain(self, screen):
         screen.blit(self.background_img, (0,0))
+   
+        # Draw a box around the current character
+        # Get a rect same pos as character
+        # Done first so that it can be filled to make lines thicker 
+        if (self.selected_row == 0):
+            highlight_rect = self.current_theme_actors[self.selected_col].copy()
+        elif (self.selected_row == 1):
+            highlight_rect = self.available_theme_actors[self.selected_col].copy()
+        highlight_rect.inflate_ip(6,6)
+        screen.draw.filled_rect(highlight_rect, (255,255,255))
+        
         screen.draw.text('Custom Character', fontsize=60, center=(400,50), shadow=(1,1), color=(255,255,255), scolor="#202020")
         
         screen.draw.text('Existing Character', fontsize=40, center=(400,120), shadow=(1,1), color=(255,255,255), scolor="#202020")      
@@ -124,15 +173,6 @@ class CustomCharacter:
         screen.draw.text('Customize Character', fontsize=40, center=(400,340), shadow=(1,1), color=(255,255,255), scolor="#202020")      
         for i in range (0,len(self.available_theme_actors)):
             self.available_theme_actors[i].draw()
-            
-        # Draw a box around the current character
-        # Get a rect same pos as character
-        if (self.selected_row == 0):
-            highlight_rect = self.current_theme_actors[self.selected_col].copy()
-        elif (self.selected_row == 1):
-            highlight_rect = self.available_theme_actors[self.selected_col].copy()
-            
-        screen.draw.rect(highlight_rect, (255,255,255))
         
     
     def update(self, keyboard):
@@ -158,8 +198,53 @@ class CustomCharacter:
             
     # Update on customize screen
     def updateCustom(self, keyboard):
+        self.pause_timer.startCountDown()
+        if (keyboard.down):
+            self.selected_row_custom +=1
+            # If already on bottom row (Cancel / OK Button) then stay there and return
+            if (self.selected_row_custom > self.theme_config.numKeys()):
+                self.selected_row_custom = self.theme_config.numKeys()
+                return STATUS_CUSTOM
+            # Whenever moving up or down reset to the current colour position  (or OK button for bottom row)
+            self.selected_colour_custom = -1
+            # Row after colours is Cancel / OK button
+            if (self.selected_row_custom >= self.theme_config.numKeys()):
+                    self.selected_row_custom = self.theme_config.numKeys()
+        if (keyboard.up):
+            self.selected_row_custom -=1
+            # Whenever moving up or down reset to the current colour position
+            self.selected_colour_custom = -1
+            # Row after colours is Cancel / OK button
+            if (self.selected_row_custom < 0):
+                    self.selected_row_custom = 0
+        if (keyboard.left):
+            self.selected_colour_custom -= 1
+            if self.selected_colour_custom < -1:
+                self.selected_colour_custom = -1
+        if (keyboard.right):
+            # Reuse the colour for use by the Cancel button
+            if (self.selected_row_custom > self.theme_config.numKeys()):
+                self.selected_colour_customer = 0
+                return STATUS_CUSTOM
+            self.selected_colour_custom += 1
+            if self.selected_colour_custom > self.theme_config.numColourOptions() -1:
+                self.selected_colour_custom = self.theme_config.numColourOptions() -1
         if (keyboard.space or keyboard.lshift or keyboard.rshift or keyboard.lctrl or keyboard.RETURN):
-            return STATUS_MAIN
+            if (self.selected_row_custom < self.theme_config.numKeys()):
+                all_keys = self.theme_config.getKeys()
+                this_key = all_keys[self.selected_row_custom]
+                colour_options = self.theme_config.getColourOptions(this_key)
+                # update with the selected colour
+                self.theme_config.setColour(this_key,colour_options[self.selected_colour_custom])
+                return STATUS_CUSTOM
+            # Here if it's a select on bottom row = Save or Cancel
+            # Cancel button selected
+            elif (self.selected_colour_custom > -1):
+                return STATUS_MAIN
+            else:
+                #### Save the entry
+                #Todo
+                return STATUS_CUSTOM
         else:
             return STATUS_CUSTOM
             

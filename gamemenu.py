@@ -99,7 +99,7 @@ class GameMenu:
         self.menu_pos = 0       # Tracks which menu item is selected
 
         
-        # Timer restrict keyboard movements to every 1/2 second (prevent multiple presses)
+        # Timer restrict keyboard movements to prevent multiple presses
         self.menu_timer = Timer(0.15)
         
         # Finish setting up MenuItems
@@ -149,11 +149,9 @@ class GameMenu:
             selected_command = 'quit'
             
         # If a menu object was clicked / chosen then handle
-        #if (selected_command == 'quit' or selected_command == 'start'):
         if (selected_command_type == 'command'):
             # Reset menu to start position
             self.reset()
-            #return self.menu_items[self.menu_pos].getCommand()
             return selected_command
         elif (selected_command_type == 'textpage'):
             self.status = STATUS_PAGE
