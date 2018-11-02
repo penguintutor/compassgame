@@ -70,6 +70,10 @@ class ThemeDetails:
             print (str(e))
             self.theme_loaded = False
                 
+    # Return all the CustomColours 
+    def getCustomColours(self):
+        return self.custom_colours
+                
                 
     def isThemeLoaded(self):
         return self.theme_loaded
@@ -81,6 +85,9 @@ class ThemeDetails:
     # Returns dict of short label = full string
     def getLabels(self):
         return self.labels
+        
+    def getDefaultColour(self,key):
+        return self.default_colours[key]
                 
     # uses custom colours
     def getColour(self,key):

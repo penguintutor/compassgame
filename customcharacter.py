@@ -1,4 +1,5 @@
 import re
+import subprocess
 import os
 from os import listdir
 from pgzero.actor import Actor
@@ -17,10 +18,23 @@ TEMP_DIR = "tmp/"                 # Use to create svgs before creating the png f
 STATUS_MAIN = 0
 STATUS_CUSTOM = 1
 STATUS_CLICKED = 2
+STATUS_PROGRESS = 3
+
+# # filenames - number of entries per direction
+# file_name_entries = {
+    # 'down':4,
+    # 'up':4,
+    # 'left':4,
+    # 'right':4,
+    # 'jump':2,
+    # 'duck':2
+# }
 
 
 
 CONVERT_CMD = "/usr/bin/convert"
+# {} is used to represent in and out files - uses .format
+CONVERT_CMD_OPTS = " -resize 40x77 {} {}"
 
 class CustomCharacter:
     
@@ -248,9 +262,26 @@ class CustomCharacter:
                 if (file_num == 0):
                     print ("Unable to find next number for save file")
                     return STATUS_MAIN
-                else: 
-                    print ("Next entry is "+str(file_num))
-                #Todo
+
+                #print ("Next entry is "+str(file_num))
+                svg_regexp_string = self.img_file_format.format(self.customize_theme, "00", "([a-zA-Z0-9]+)", "(\d\d)")+".svg"
+                svg_regexp = re.compile(svg_regexp_string)
+                
+                # Store the different filenames in a list so that they can be used later
+                new_filenames = []
+                new_png_filenames = []
+                
+                for file in listdir(THEME_DIR):
+                    matches = svg_regexp.match(file)
+                    if (matches != None):
+                        new_filename = self.img_file_format.format(self.customize_theme, str(file_num), matches.group(1), matches.group(2))+".svg"
+                        new_filenames.append(new_filename)
+                        new_png_filename = self.img_file_format.format(self.customize_theme, str(file_num), matches.group(1), matches.group(2))+".png"
+                        new_png_filenames.append(new_png_filename)    
+                        # Create SVG
+                        self.createSVG(THEME_DIR+matches.group(0), TEMP_DIR+new_filename)
+                        # convert from SVG to png using ImageMagick convert (must be installed)
+                        subprocess.call(CONVERT_CMD+CONVERT_CMD_OPTS.format(TEMP_DIR+new_filename, IMAGE_DIR+new_png_filename), shell=True)
                 return STATUS_CUSTOM
         else:
             return STATUS_CUSTOM
@@ -345,3 +376,35 @@ class CustomCharacter:
                 return i
         # Unlikely to ever reach this - 100 entries for a single theme
         return 0
+        
+        
+    # Create SVG based on original, creating new file
+    # Uses self.theme_config to get details of what colours need to be mapped to new colours
+    def createSVG (self, original_file, new_file):
+        print ("Creating SVG from "+original_file+" to "+new_file)
+        new_colours = self.theme_config.getCustomColours()
+        #try:
+        with open(original_file, "r") as infile:
+            with open(new_file, "w") as outfile:
+                for line in infile:
+                    outline = line
+                    for key in new_colours:
+                        # Uses replace method to swap colour for the new colour
+                        # If we have a match then leave
+                        this_def_colour_tuple = self.theme_config.getDefaultColour(key) 
+                        this_def_colour = "({},{},{})".format(this_def_colour_tuple[0], this_def_colour_tuple[1], this_def_colour_tuple[2])
+                        if (not outline.find(this_def_colour)):
+                            this_colour = "({},{},{})".format(new_colours[key][0], new_colours[key][1], new_colours[key][2])
+                            outline = line.replace(self.theme_config.getDefaultColour(key), this_colour)
+                            # Exit the loop so as not to swap multiple times
+                            break
+                    outfile.write(outline)                            
+        infile.close()
+        outfile.close()
+        return True
+        #except Exception as e:
+        #    print ("Error creating new config file")
+        #    print (e)
+        #    return False
+        
+        
