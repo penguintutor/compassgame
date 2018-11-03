@@ -34,7 +34,7 @@ STATUS_PROGRESS = 3
 
 CONVERT_CMD = "/usr/bin/convert"
 # {} is used to represent in and out files - uses .format
-CONVERT_CMD_OPTS = " -resize 40x77 {} {}"
+CONVERT_CMD_OPTS = " -resize 40x77 -background transparent {} {}"
 
 class CustomCharacter:
     
@@ -250,6 +250,7 @@ class CustomCharacter:
                 colour_options = self.theme_config.getColourOptions(this_key)
                 # update with the selected colour
                 self.theme_config.setColour(this_key,colour_options[self.selected_colour_custom])
+                print ("Setting {} to colour {}".format(this_key,colour_options[self.selected_colour_custom]))
                 return STATUS_CUSTOM
             # Here if it's a select on bottom row = Save or Cancel
             # Cancel button selected
@@ -264,7 +265,7 @@ class CustomCharacter:
                     return STATUS_MAIN
 
                 #print ("Next entry is "+str(file_num))
-                svg_regexp_string = self.img_file_format.format(self.customize_theme, "00", "([a-zA-Z0-9]+)", "(\d\d)")+".svg"
+                svg_regexp_string = self.img_file_format.format(self.customize_theme, "00", "([a-zA-Z0-9]+)", "([0-9][0-9])")+".svg"
                 svg_regexp = re.compile(svg_regexp_string)
                 
                 # Store the different filenames in a list so that they can be used later
@@ -274,9 +275,10 @@ class CustomCharacter:
                 for file in listdir(THEME_DIR):
                     matches = svg_regexp.match(file)
                     if (matches != None):
-                        new_filename = self.img_file_format.format(self.customize_theme, str(file_num), matches.group(1), matches.group(2))+".svg"
+                        two_digit_str = "{:02d}".format(file_num)
+                        new_filename = self.img_file_format.format(self.customize_theme, two_digit_str, matches.group(1), matches.group(2))+".svg"
                         new_filenames.append(new_filename)
-                        new_png_filename = self.img_file_format.format(self.customize_theme, str(file_num), matches.group(1), matches.group(2))+".png"
+                        new_png_filename = self.img_file_format.format(self.customize_theme, "{:02d}".format(file_num), matches.group(1), matches.group(2))+".png"
                         new_png_filenames.append(new_png_filename)    
                         # Create SVG
                         self.createSVG(THEME_DIR+matches.group(0), TEMP_DIR+new_filename)
@@ -382,6 +384,7 @@ class CustomCharacter:
     # Uses self.theme_config to get details of what colours need to be mapped to new colours
     def createSVG (self, original_file, new_file):
         print ("Creating SVG from "+original_file+" to "+new_file)
+        print ("Looking for:\nto replace with:\n{}".format(str(self.theme_config.getCustomColours())))
         new_colours = self.theme_config.getCustomColours()
         #try:
         with open(original_file, "r") as infile:
@@ -393,9 +396,11 @@ class CustomCharacter:
                         # If we have a match then leave
                         this_def_colour_tuple = self.theme_config.getDefaultColour(key) 
                         this_def_colour = "({},{},{})".format(this_def_colour_tuple[0], this_def_colour_tuple[1], this_def_colour_tuple[2])
-                        if (not outline.find(this_def_colour)):
+                        print ("Looking for: "+this_def_colour) 
+                        if (outline.find(this_def_colour)):
                             this_colour = "({},{},{})".format(new_colours[key][0], new_colours[key][1], new_colours[key][2])
-                            outline = line.replace(self.theme_config.getDefaultColour(key), this_colour)
+                            print ("Replacing {} with {}".format(this_def_colour, this_colour))
+                            outline = line.replace(this_def_colour, this_colour)
                             # Exit the loop so as not to swap multiple times
                             break
                     outfile.write(outline)                            

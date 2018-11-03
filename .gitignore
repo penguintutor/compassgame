@@ -1,6 +1,8 @@
 # Byte-compiled / optimized / DLL files
 # Config files
 *.dat
+tmp/
+
 
 __pycache__/
 *.py[cod]
