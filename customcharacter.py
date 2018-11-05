@@ -20,15 +20,6 @@ STATUS_CUSTOM = 1
 STATUS_CLICKED = 2
 STATUS_PROGRESS = 3
 
-# # filenames - number of entries per direction
-# file_name_entries = {
-    # 'down':4,
-    # 'up':4,
-    # 'left':4,
-    # 'right':4,
-    # 'jump':2,
-    # 'duck':2
-# }
 
 
 
