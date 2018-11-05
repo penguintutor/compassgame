@@ -21,7 +21,8 @@ class HighScore():
     
     
 
-    def __init__(self, filename):
+    def __init__(self, game_controls, filename):
+        self.game_controls = game_controls
         self.filename = filename
         # Setup high score when created
         self.loadHighScore()
@@ -126,29 +127,29 @@ class HighScore():
             return 'highscore'
         if (self.mode == 'edit'):
             # Editing
-            if (keyboard.up):
+            if (self.game_controls.isPressed(keyboard,'up')):
                 self.new_name[self.char_selected] = self.charIncrement(self.new_name[self.char_selected])
                 self.pause_timer.startCountDown()
-            if (keyboard.down):
+            if (self.game_controls.isPressed(keyboard,'down')):
                 self.new_name[self.char_selected] = self.charDecrement(self.new_name[self.char_selected])
                 self.pause_timer.startCountDown()
-            if (keyboard.left) :
+            if (self.game_controls.isPressed(keyboard,'left')) :
                 if (self.char_selected > 0) :
                     self.char_selected -= 1
                     self.pause_timer.startCountDown()
-            if (keyboard.right) :
+            if (self.game_controls.isPressed(keyboard,'right')) :
                 if (self.char_selected < 2) :
                     self.char_selected += 1
                     self.pause_timer.startCountDown()
             # If save chosen (map / jump / enter)
-            if (keyboard.space or keyboard.lshift or keyboard.rshift or keyboard.lctrl or keyboard.RETURN):
+            if (self.game_controls.isOrPressed(keyboard,['jump','duck'])):
                 self.updHighScoreList()
                 self.saveHighScore()
                 self.mode = 'display'
                 return 'menu'
             else:
                 return 'highscore'
-        if (keyboard.space or keyboard.lshift or keyboard.rshift or keyboard.lctrl or keyboard.RETURN):
+        if (self.game_controls.isOrPressed(keyboard,['jump','duck'])):
             return 'menu'
         return 'highscore'
     

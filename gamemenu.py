@@ -77,7 +77,8 @@ class GameMenu:
 
     # Requires width and height - these can be the same as the screen or smaller if need to constrain menu
     # Offset and border determine distance from origin of screen and any fixed area to avoid respectively
-    def __init__(self, width, height, offset=(0,0), border=100):
+    def __init__(self, game_controls, width, height, offset=(0,0), border=100):
+        self.game_controls = game_controls
         self.width = width              # width of screen
         self.height = height            # height of screen
         self.offset = offset            # tuple x,y for offset from start of screen
@@ -100,7 +101,7 @@ class GameMenu:
 
         
         # Timer restrict keyboard movements to prevent multiple presses
-        self.menu_timer = Timer(0.15)
+        self.menu_timer = Timer(0.12)
         
         # Finish setting up MenuItems
         # At the moment this doesn't provide much extra functionality, but by 
@@ -127,15 +128,15 @@ class GameMenu:
         # check if we are in menu timer in which case return until expired
         elif (self.menu_timer.getTimeRemaining() > 0): 
             return 'menu'
-        elif (keyboard.up and self.menu_pos>0):
+        elif (self.game_controls.isPressed(keyboard,'up') and self.menu_pos>0):
             if (self.status == STATUS_MENU):
                 self.menu_pos -= 1
                 self.menu_timer.startCountDown()
-        elif (keyboard.down and self.menu_pos<len(self.menu_items)-1):
+        elif (self.game_controls.isPressed(keyboard,'down') and self.menu_pos<len(self.menu_items)-1):
             if (self.status == STATUS_MENU):
                 self.menu_pos += 1
                 self.menu_timer.startCountDown()
-        elif (keyboard.space or keyboard.lshift or keyboard.rshift or keyboard.lctrl or keyboard.RETURN):
+        elif (self.game_controls.isOrPressed(keyboard,['jump','duck'])):
             if (self.status == STATUS_MENU):
                 selected_command_type =  self.menu_items[self.menu_pos].getMenuType()
                 selected_command = self.menu_items[self.menu_pos].getCommand()
@@ -144,7 +145,7 @@ class GameMenu:
                 selected_command_type = 'menu'
                 self.status = STATUS_MENU
                 self.menu_timer.startCountDown()
-        elif (keyboard.escape):
+        elif (self.game_controls.isPressed(keyboard,'escape')):
             selected_command_type = 'command'
             selected_command = 'quit'
             

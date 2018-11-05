@@ -12,6 +12,7 @@ import random
 
 from playeractor import PlayerActor
 from gameplay import GamePlay
+from gamecontrols import GameControls
 from timer import Timer
 from highscore import HighScore
 from gamemenu import GameMenu
@@ -62,14 +63,16 @@ action_text = {'north':'Go north', 'south':'Go south',
 
 # Track Status etc
 game_status = GamePlay(action_text)
+# Handles key interaction
+game_controls = GameControls()
 
 # Track high score
-high_score = HighScore(HIGH_SCORE_FILENAME)
+high_score = HighScore(game_controls, HIGH_SCORE_FILENAME)
 
 # These are used for the menu sub commands - must be classes
 # Must implement show() display() mouse_move() and mouse_click() select()
 sub_commands = {
-    'character' : CustomCharacter(PLAYER_TEXT_IMG_FORMAT),
+    'character' : CustomCharacter(game_controls, PLAYER_TEXT_IMG_FORMAT),
     'controls' : CustomControls(),
     'highscore' : high_score
 }
@@ -89,7 +92,7 @@ obstacles = []
 # Positions to place obstacles Tuples: (x,y)
 obstacle_positions = [(200,200), (400, 400), (500,500), (80,120), (700, 150), (750,540), (200,550), (60,320), (730, 290), (390,170), (420,500) ]
 
-menu = GameMenu(WIDTH,HEIGHT)
+menu = GameMenu(game_controls, WIDTH,HEIGHT)
 
 
 #Rectangles for compass points for collision detection to ensure player is in correct position
@@ -142,7 +145,7 @@ def update():
     # Check for pause status if so only look for key press
     if (game_status.isUserPause()):
         # duck or jump to unpause (if want to use p button would need to add delay to prevent rapid toggling)
-        if (keyboard.space or keyboard.lshift or keyboard.rshift or keyboard.lctrl):
+        if (game_control.isOrPressed(keyboard, ['jump', 'duck'])):
             game_status.setUserPause(False)
         else:
             return
@@ -199,10 +202,11 @@ def update():
     if (game_status.isNewGame() or game_status.isScoreShown()):
         # Display instructions (in draw() rather than here)
         # If escape then quit the game
-        if (keyboard.escape):
+        #if (keyboard.escape):
+        if (self.game_controls.isPressed(keyboard, 'escape')):
             quit()
         # If jump / duck then go to menu
-        if (keyboard.space or keyboard.lshift or keyboard.rshift or keyboard.lctrl):            
+        if (game_control.isOrPressed(keyboard, ['jump', 'duck'])):            
             # Reset player including score
             player.reset()
             game_status.setMenu()
@@ -277,27 +281,27 @@ def handle_keyboard():
     new_direction = ''
     
     # Check for pause button first
-    if (keyboard.p):
+    if (game_controls.isPressed(keyboard,'pause')):
         game_status.setUserPause()
     
     # Duck or Jump - don't move character, but change image
     # Allow two different keys for both these
-    if (keyboard.space or keyboard.lshift):
+    if (game_controls.isPressed(keyboard, 'duck')):
         new_direction = 'duck'
-    elif (keyboard.rshift or keyboard.lctrl):
+    elif (game_controls.isPressed(keyboard, 'jump')):
         new_direction = 'jump'
         # Only handle direction buttons if duck or jump have not been selected (prevent ducking constantly and moving)
     else:
-        if (keyboard.up):
+        if (game_controls.isPressed(keyboard,'up')):
             new_direction = 'up'
             player.moveActor(new_direction)
-        if (keyboard.down):
+        if (game_controls.isPressed(keyboard,'down')):
             new_direction = 'down'
             player.moveActor(new_direction)
-        if (keyboard.left) :
+        if (game_controls.isPressed(keyboard,'left')) :
             new_direction = 'left'
             player.moveActor(new_direction)
-        if (keyboard.right) :
+        if (game_controls.isPressed(keyboard,'right')) :
             new_direction = 'right'
             player.moveActor(new_direction)
             

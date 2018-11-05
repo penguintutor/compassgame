@@ -62,7 +62,8 @@ class CustomCharacter:
     
     status = STATUS_MAIN
 
-    def __init__ (self, img_file_format):
+    def __init__ (self, game_controls, img_file_format):
+        self.game_controls = game_controls
         self.img_file_format = img_file_format
         # Create a regular expression to identify themes
         # does not use \w as do not include _ character
@@ -240,18 +241,18 @@ class CustomCharacter:
             # Row after colours is Cancel / OK button
             if (self.selected_row_custom >= self.theme_config.numKeys()):
                     self.selected_row_custom = self.theme_config.numKeys()
-        if (keyboard.up):
+        if (self.game_controls.isPressed(keyboard,'up')):
             self.selected_row_custom -=1
             # Whenever moving up or down reset to the current colour position
             self.selected_colour_custom = -1
             # Row after colours is Cancel / OK button
             if (self.selected_row_custom < 0):
                     self.selected_row_custom = 0
-        if (keyboard.left):
+        if (self.game_controls.isPressed(keyboard,'left')):
             self.selected_colour_custom -= 1
             if self.selected_colour_custom < -1:
                 self.selected_colour_custom = -1
-        if (keyboard.right):
+        if (self.game_controls.isPressed(keyboard,'right')):
             # Reuse the colour for use by the Cancel button
             if (self.selected_row_custom > self.theme_config.numKeys()):
                 self.selected_colour_customer = 0
@@ -259,7 +260,7 @@ class CustomCharacter:
             self.selected_colour_custom += 1
             if self.selected_colour_custom > self.theme_config.numColourOptions() -1:
                 self.selected_colour_custom = self.theme_config.numColourOptions() -1
-        if (keyboard.space or keyboard.lshift or keyboard.rshift or keyboard.lctrl or keyboard.RETURN):
+        if (self.game_controls.isOrPressed(keyboard,['jump', 'duck'])):
             if (self.selected_row_custom < self.theme_config.numKeys()):
                 all_keys = self.theme_config.getKeys()
                 this_key = all_keys[self.selected_row_custom]
@@ -304,17 +305,17 @@ class CustomCharacter:
             
     # Update main screen
     def updateMain(self, keyboard):
-        if (keyboard.up):
+        if (self.game_controls.isPressed(keyboard,'up')):
             self.selected_row = 0
             self.selected_col = self.checkColPos(self.selected_col, self.selected_row)
-        if (keyboard.down):
+        if (self.game_controls.isPressed(keyboard,'down')):
             self.selected_row = 1
             self.selected_col = self.checkColPos(self.selected_col, self.selected_row)
-        if (keyboard.right):
+        if (self.game_controls.isPressed(keyboard,'right')):
             self.selected_col = self.checkColPos(self.selected_col + 1, self.selected_row)
-        if (keyboard.left):
+        if (self.game_controls.isPressed(keyboard,'left')):
             self.selected_col = self.checkColPos(self.selected_col - 1, self.selected_row)
-        if (keyboard.space or keyboard.lshift or keyboard.rshift or keyboard.lctrl or keyboard.RETURN):
+        if (self.game_controls.isOrPressed(keyboard,['jump','duck'])):
             # If pressed on top row then update theme
             if (self.selected_row == 0):
                 (self.theme, self.theme_num) = self.current_themes[self.selected_col]

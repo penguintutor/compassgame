@@ -1,3 +1,4 @@
+# Provides the menu to select custom controls
 from timer import Timer
 
 class CustomControls:
