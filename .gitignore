@@ -2,6 +2,7 @@
 # Config files
 *.dat
 tmp/
+images/
 
 
 __pycache__/

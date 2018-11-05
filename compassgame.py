@@ -101,8 +101,6 @@ west_box = Rect((0, 0), (box_size, HEIGHT))
 
 
 
-
-
 def draw():
     # Check for sub command first as they use own background image
     if (game_status.isSubCommand()):
