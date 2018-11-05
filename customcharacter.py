@@ -20,9 +20,6 @@ STATUS_CUSTOM = 1
 STATUS_CLICKED = 2
 STATUS_PROGRESS = 3
 
-
-
-
 CONVERT_CMD = "/usr/bin/convert"
 # {} is used to represent in and out files - uses .format
 CONVERT_CMD_OPTS = " -resize 40x77 -background transparent {} {}"
@@ -52,13 +49,15 @@ class CustomCharacter:
     # which colour col pos is selected (-1 = none)
     selected_colour_custom = -1
     
-    
     # Default theme must be valid
     theme = "person1"
     theme_num = 0
     
     # Class to hold details of theme from config file
     theme_config = ThemeDetails(THEME_DIR)
+    
+    # Track which character is shown on the left most position
+    char_left_pos = 0
     
     
     status = STATUS_MAIN
@@ -184,13 +183,23 @@ class CustomCharacter:
         screen.draw.text('Custom Character', fontsize=60, center=(400,50), shadow=(1,1), color=(255,255,255), scolor="#202020")
         
         screen.draw.text('Existing Character', fontsize=40, center=(400,120), shadow=(1,1), color=(255,255,255), scolor="#202020")      
-        for i in range (0,len(self.current_theme_actors)):
-            self.current_theme_actors[i].draw()
+        self.drawCustomChars()
             
         screen.draw.text('Customize Character', fontsize=40, center=(400,340), shadow=(1,1), color=(255,255,255), scolor="#202020")      
         for i in range (0,len(self.available_theme_actors)):
             self.available_theme_actors[i].draw()
         
+    # Draws the custom chars
+    # First updates each of the actors with their current location then calls
+    # draw 
+    def drawCustomChars(self):
+        xpos = 100
+        for i in range (self.char_left_pos,self.char_left_pos+7):
+            self.current_theme_actors[i].x = xpos
+            self.current_theme_actors[i].draw()
+            if (i >= len(self.current_theme_actors)):
+                break
+            xpos += 100
     
     def update(self, keyboard):
         if (self.pause_timer.getTimeRemaining() > 0):
@@ -335,6 +344,10 @@ class CustomCharacter:
         if (row_pos == 0):
             if (col_pos >= len(self.current_themes)):
                 return (len(self.current_themes) -1)
+            elif (col_pos >= self.char_left_pos + 7 and self.char_left_pos < len(self.current_themes) - 6):
+                self.char_left_pos += 1
+            elif (col_pos <= self.char_left_pos and self.char_left_pos > 0):
+                self.char_left_pos -= 1
         elif (row_pos == 1):
             if (col_pos >= len(self.available_themes)):
                 return (len(self.available_themes) -1)

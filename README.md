@@ -46,11 +46,17 @@ Other plans include
 ## Joystick / keyboard only control
 The game is intended to be played with a Joystick on the Picade or a keyboard. The mouse can be used in some of the configuration menus, but cannot be used in the game.
 
+### Custom Themes 
+Customer themes can be added changing the characters in the game. There is a maximum of 7 themes. Any more will not be shown correctly. There can however be up to 99 variations on each theme.
+
 ### Importance of configuration rules
 When creating a new theme the configuration rules need to be fully implemented as specified. This includes the default entry and that all colour options are of the same length.
 
 ### Ordering of customization colours
 The order of the label options in the theme configuration file is ignored. This is a feature of the YAML parser used. As this is for a configuration and the option is clearly labelled on the configuration page this is not considered a bug. To fix this would either need a different YAML parser or an additional list that preserves ordering.
+
+### Unique custom colours
+All the colours used that can be customized have to be unique. These can be very similar (eg. just one differences in any of the red, green, blue values).
 
 
 # More details
