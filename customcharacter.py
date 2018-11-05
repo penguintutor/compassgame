@@ -69,10 +69,16 @@ class CustomCharacter:
         # does not use \w as do not include _ character
         # Look for image 0 (down 1) - other variants of the first number part is different colours
         # Timer restrict keyboard movements to fraction of second to prevent multiple presses
-        self.pause_timer = Timer(0.15)
+        self.pause_timer = Timer(0.12)
+        self.loadPreviews()
+        self.loadThemes()
         
+
+   
+    # Themes only need to be loaded once - they don't change except by downloading and installing
+    def loadThemes(self):    
         # Load the themes - only look in the SVG folder
-        theme_regexp_string = img_file_format.format("([a-zA-Z0-9]+)", "00", "down", "01")+".svg"
+        theme_regexp_string = self.img_file_format.format("([a-zA-Z0-9]+)", "00", "down", "01")+".svg"
         theme_regexp = re.compile(theme_regexp_string)
         xpos = 100
         for file in listdir(THEME_DIR):
@@ -81,11 +87,17 @@ class CustomCharacter:
                 # uses group(0) for full filename, group(1) for theme name
                 self.available_themes.append(matches.group(1))
                 # Add default image (theme 00 down 01) as actor
-                self.available_theme_actors.append(Actor(img_file_format.format(matches.group(1), "00", "down", "01"), (xpos,self.custom_actor_ypos)))
+                self.available_theme_actors.append(Actor(self.img_file_format.format(matches.group(1), "00", "down", "01"), (xpos,self.custom_actor_ypos)))
                 xpos += 100
-                
+            
+    # Previews are the current variations of the themes, these may be reloaded when a new custom character is created
+    def loadPreviews(self):            
+        # Reset values from previous load
+        self.current_themes = []
+        self.current_theme_actors = []
+        
         # Load the different variations on the themes currently available
-        png_regexp_string = img_file_format.format("([a-zA-Z0-9]+)", "([0-9][0-9])", "down", "01")+".png"
+        png_regexp_string = self.img_file_format.format("([a-zA-Z0-9]+)", "([0-9][0-9])", "down", "01")+".png"
         png_regexp = re.compile(png_regexp_string)
         xpos = 100
         for file in listdir(IMAGE_DIR):
@@ -93,7 +105,7 @@ class CustomCharacter:
             if (matches != None):
                 # uses group(0) for full filename, group(1) for theme name
                 self.current_themes.append((matches.group(1),int(matches.group(2))))
-                self.current_theme_actors.append(Actor(img_file_format.format(matches.group(1), matches.group(2), "down", "01"), (xpos,self.current_actor_ypos)))
+                self.current_theme_actors.append(Actor(self.img_file_format.format(matches.group(1), matches.group(2), "down", "01"), (xpos,self.current_actor_ypos)))
                 xpos += 100
             
         
@@ -198,6 +210,10 @@ class CustomCharacter:
             if (self.selected_row == 0):
                 (self.theme, self.theme_num) = self.current_themes[self.selected_col]
             return 'menu'
+        elif (self.status == STATUS_PROGRESS):
+            # Reload the custom screen
+            self.loadPreviews()
+            self.status = STATUS_MAIN
         else:
             return
             
@@ -241,7 +257,6 @@ class CustomCharacter:
                 colour_options = self.theme_config.getColourOptions(this_key)
                 # update with the selected colour
                 self.theme_config.setColour(this_key,colour_options[self.selected_colour_custom])
-                print ("Setting {} to colour {}".format(this_key,colour_options[self.selected_colour_custom]))
                 return STATUS_CUSTOM
             # Here if it's a select on bottom row = Save or Cancel
             # Cancel button selected
@@ -255,7 +270,6 @@ class CustomCharacter:
                     print ("Unable to find next number for save file")
                     return STATUS_MAIN
 
-                #print ("Next entry is "+str(file_num))
                 svg_regexp_string = self.img_file_format.format(self.customize_theme, "00", "([a-zA-Z0-9]+)", "([0-9][0-9])")+".svg"
                 svg_regexp = re.compile(svg_regexp_string)
                 
@@ -272,10 +286,10 @@ class CustomCharacter:
                         new_png_filename = self.img_file_format.format(self.customize_theme, "{:02d}".format(file_num), matches.group(1), matches.group(2))+".png"
                         new_png_filenames.append(new_png_filename)    
                         # Create SVG
-                        self.createSVG(THEME_DIR+matches.group(0), TEMP_DIR+new_filename)
-                        # convert from SVG to png using ImageMagick convert (must be installed)
-                        subprocess.call(CONVERT_CMD+CONVERT_CMD_OPTS.format(TEMP_DIR+new_filename, IMAGE_DIR+new_png_filename), shell=True)
-                return STATUS_CUSTOM
+                        if (self.createSVG(THEME_DIR+matches.group(0), TEMP_DIR+new_filename)):
+                            # convert from SVG to png using ImageMagick convert (must be installed) only if create SVG was successful
+                            subprocess.call(CONVERT_CMD+CONVERT_CMD_OPTS.format(TEMP_DIR+new_filename, IMAGE_DIR+new_png_filename), shell=True)
+                return STATUS_PROGRESS
         else:
             return STATUS_CUSTOM
             
@@ -308,6 +322,7 @@ class CustomCharacter:
                 self.pause_timer.startCountDown()
                 return 'character'
             return 'menu'
+        self.pause_timer.startCountDown()
             
     
     
@@ -374,33 +389,29 @@ class CustomCharacter:
     # Create SVG based on original, creating new file
     # Uses self.theme_config to get details of what colours need to be mapped to new colours
     def createSVG (self, original_file, new_file):
-        print ("Creating SVG from "+original_file+" to "+new_file)
-        print ("Looking for:\nto replace with:\n{}".format(str(self.theme_config.getCustomColours())))
         new_colours = self.theme_config.getCustomColours()
-        #try:
-        with open(original_file, "r") as infile:
-            with open(new_file, "w") as outfile:
-                for line in infile:
-                    outline = line
-                    for key in new_colours:
-                        # Uses replace method to swap colour for the new colour
-                        # If we have a match then leave
-                        this_def_colour_tuple = self.theme_config.getDefaultColour(key) 
-                        this_def_colour = "({},{},{})".format(this_def_colour_tuple[0], this_def_colour_tuple[1], this_def_colour_tuple[2])
-                        print ("Looking for: "+this_def_colour) 
-                        if (outline.find(this_def_colour)):
-                            this_colour = "({},{},{})".format(new_colours[key][0], new_colours[key][1], new_colours[key][2])
-                            print ("Replacing {} with {}".format(this_def_colour, this_colour))
-                            outline = line.replace(this_def_colour, this_colour)
-                            # Exit the loop so as not to swap multiple times
-                            break
-                    outfile.write(outline)                            
-        infile.close()
-        outfile.close()
-        return True
-        #except Exception as e:
-        #    print ("Error creating new config file")
-        #    print (e)
-        #    return False
+        try:
+            with open(original_file, "r") as infile:
+                with open(new_file, "w") as outfile:
+                    for line in infile:
+                        outline = line
+                        for key,value in new_colours.items():
+                            # Uses replace method to swap colour for the new colour
+                            # If we have a match then leave
+                            this_def_colour_tuple = self.theme_config.getDefaultColour(key) 
+                            this_def_colour = "({},{},{})".format(this_def_colour_tuple[0], this_def_colour_tuple[1], this_def_colour_tuple[2])
+                            if (outline.find(this_def_colour) != -1):
+                                this_colour = "({},{},{})".format(new_colours[key][0], new_colours[key][1], new_colours[key][2])
+                                outline = line.replace(this_def_colour, this_colour)
+                                # Exit the loop so as not to swap multiple times
+                                break
+                        outfile.write(outline)                            
+            infile.close()
+            outfile.close()
+            return True
+        except Exception as e:
+            print ("Error creating new config file")
+            print (e)
+            return False
         
         
