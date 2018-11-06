@@ -67,6 +67,8 @@ class CustomControls:
     # If return is 'controls' then still in custon controls, so don't update anything else
     # If return is 'menu' then return to main game menu
     def update(self, keyboard):
+        if (self.status == STATUS_CUSTOM_KEY):
+            self.checkKey()
         # check if status is clicked - which means mouse was pressed on a valid entry
         if (self.status == STATUS_CLICKED):
             self.selected_key = self.menu_items[self.menu_pos].getCommand()
@@ -92,6 +94,17 @@ class CustomControls:
             return 'menu'
         return 'controls'            
 
+    # Checks pygame event queue for last key pressed
+    def checkKey(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit(); #sys.exit() if sys is imported
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_0:
+                    print("Hey, you pressed the key, '0'!")
+                if event.key == pygame.K_1:
+                    print("Doing whatever")
+
     
     def draw(self, screen):
         # Create a rectangle across the area - provides transparancy
@@ -99,9 +112,12 @@ class CustomControls:
         # draw directly onto the screen draw surface (transparency doesn't apply)
         if (self.status == STATUS_MENU):
             self.drawMenu(screen)
-        #elif (self.status == STATUS_CUSTOM_KEY):
-        #    self.showPage(screen)
+        elif (self.status == STATUS_CUSTOM_KEY):
+            self.drawCustom(screen)
         
+        
+    def drawCustom(self, screen):
+        screen.draw.text("Press custom key for "+self.selected_key, fontsize=self.menu_font_size, midtop=(self.width/2,self.offset[1]+self.border+(self.menu_spacing)+self.top_spacing), color=(0,0,0))
         
         
     def drawMenu(self, screen):
