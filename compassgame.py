@@ -73,7 +73,7 @@ high_score = HighScore(game_controls, HIGH_SCORE_FILENAME)
 # Must implement show() display() mouse_move() and mouse_click() select()
 sub_commands = {
     'character' : CustomCharacter(game_controls, PLAYER_TEXT_IMG_FORMAT),
-    'controls' : CustomControls(),
+    'controls' : CustomControls(game_controls, WIDTH, HEIGHT),
     'highscore' : high_score
 }
 

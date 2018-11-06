@@ -196,10 +196,10 @@ class CustomCharacter:
     def drawCustomChars(self):
         xpos = 100
         for i in range (self.char_left_pos,self.char_left_pos+7):
-            self.current_theme_actors[i].x = xpos
-            self.current_theme_actors[i].draw()
             if (i >= len(self.current_theme_actors)):
                 break
+            self.current_theme_actors[i].x = xpos
+            self.current_theme_actors[i].draw()
             xpos += 100
     
     def update(self, keyboard):

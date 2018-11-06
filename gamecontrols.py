@@ -27,7 +27,7 @@ class GameControls:
         
     # Returns True if the key is pressed, else false
     def isPressed(self, keyboard, key):
-        for this_key in default_keys[key]:
+        for this_key in self.configured_keys[key]:
             if keyboard[this_key]:
                 return True
         return False
@@ -36,7 +36,20 @@ class GameControls:
     # keys must be array
     def isOrPressed(self, keyboard, keys):
         for i in range (0,len(keys)):
-            for this_key in default_keys[keys[i]]:
+            for this_key in self.configured_keys[keys[i]]:
                 if keyboard[this_key]:
                     return True
         return False
+        
+        
+        
+    def getKeys(self):
+        return self.configured_keys
+        
+        
+        
+    def getKeyString(self,index):
+        return_string = ""
+        for this_entry in self.configured_keys[index]:
+            return_string += str(this_entry)+" "
+        return return_string

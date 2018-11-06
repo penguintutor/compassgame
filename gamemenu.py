@@ -1,48 +1,18 @@
 # Handles Menu operations
+
 import pygame
 from pygame import Surface, Rect
 import pgzero
 
 from timer import Timer
+from menuitem import MenuItem
 
 
-class MenuItem:
-    
-    page = ''
-    
-    # Text is the text label to show to the user
-    # command is instruction to run or label of submenu (eg. 'instructions')
-    # menu_type is what kind of entry it is eg. 'submenu', 'command'(return string), 'textpage' or 'subcommand' (command run within the menu) 
-    def __init__ (self, text, command, menu_type):
-        self.text = text                                                                                     
-        self.command = command
-        self.menu_type = menu_type
-        
-        
-    def getText(self):
-        return self.text
-        
-    def getCommand(self):
-        return self.command
-        
-    def getMenuType(self):
-        return self.menu_type
-        
-    def setPage(self, text):
-        self.page = text
-        
-    # Only available for textpage
-    def getPage(self):
-        if self.menu_type != 'textpage':
-            return ""
-        else:
-            return self.page
     
 # Status values
 STATUS_MENU = 0
 STATUS_CLICKED = 1
-#STATUS_SUBMENU = 2 (not yet implemented)
-STATUS_PAGE = 3
+STATUS_PAGE = 2
 
 class GameMenu:
     
