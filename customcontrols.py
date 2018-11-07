@@ -3,6 +3,7 @@
 import pygame
 from pygame import Surface, Rect
 import pgzero
+from pgzero.constants import keys as keycodes
 
 from timer import Timer
 from menuitem import MenuItem
@@ -67,8 +68,12 @@ class CustomControls:
     # If return is 'controls' then still in custon controls, so don't update anything else
     # If return is 'menu' then return to main game menu
     def update(self, keyboard):
-        if (self.status == STATUS_CUSTOM_KEY):
-            self.checkKey()
+        if (self.status == STATUS_CUSTOM_KEY and self.menu_timer.getTimeRemaining() <= 0):
+            keycode = self.checkKey(keyboard)
+            if (keycode != None):
+                self.game_controls.setKey(self.selected_key, keycode)
+                self.status = STATUS_MENU
+            return 'controls'
         # check if status is clicked - which means mouse was pressed on a valid entry
         if (self.status == STATUS_CLICKED):
             self.selected_key = self.menu_items[self.menu_pos].getCommand()
@@ -88,22 +93,25 @@ class CustomControls:
         elif (self.game_controls.isOrPressed(keyboard,['jump','duck'])):
             if (self.status == STATUS_MENU):
                 self.selected_key = self.menu_items[self.menu_pos].getCommand()
-                self.reset
+                self.reset()
+                # special case where selected_key is the save option
+                if (self.selected_key == 'save'):
+                    ##Todo
+                    # Handle save here
+                    return 'menu'
                 self.status = STATUS_CUSTOM_KEY
         elif (self.game_controls.isPressed(keyboard,'escape')):
             return 'menu'
         return 'controls'            
 
     # Checks pygame event queue for last key pressed
-    def checkKey(self):
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit(); #sys.exit() if sys is imported
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_0:
-                    print("Hey, you pressed the key, '0'!")
-                if event.key == pygame.K_1:
-                    print("Doing whatever")
+    def checkKey(self, keyboard):
+        # Check all keycodes to see if any are high
+        for this_code in keycodes:
+            if (keyboard[this_code]):
+                    return this_code
+        return None
+
 
     
     def draw(self, screen):
@@ -151,6 +159,7 @@ class CustomControls:
         
     
     def reset(self):
+        self.menu_timer.startCountDown()
         self.menu_pos = 0
         self.status = STATUS_MENU
     

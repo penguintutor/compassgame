@@ -47,9 +47,12 @@ class GameControls:
         return self.configured_keys
         
         
-        
+                
     def getKeyString(self,index):
         return_string = ""
         for this_entry in self.configured_keys[index]:
             return_string += str(this_entry)+" "
         return return_string
+        
+    def setKey(self, key, keycode):
+        self.configured_keys[key] = [keycode]
