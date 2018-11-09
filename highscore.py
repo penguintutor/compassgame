@@ -161,12 +161,18 @@ class HighScore():
     
     
     def updHighScoreList(self):
+        added = False
         # Go down the list until we find an entry that is smaller and insert there
         for i in range (0,len(self.high_score_values)):
             if (self.high_score_values[i] < self.new_score):
                 self.high_score_values.insert(i,self.new_score)
                 self.high_score_names.insert(i,self.new_name[0]+self.new_name[1]+self.new_name[2])
+                added = True
                 break
+        # If added is still false then need to add it to the bottom
+        if (added == False):
+            self.high_score_values.append(self.new_score)
+            self.high_score_names.append(self.new_name[0]+self.new_name[1]+self.new_name[2])
         # If have more than max then drop the last entry
         if (len(self.high_score_values) > self.max_entries):
             self.high_score_values.pop()
