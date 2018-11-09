@@ -52,6 +52,13 @@ class CustomControls:
         # Timer restrict keyboard movements to prevent multiple presses
         self.menu_timer = Timer(0.12)
         
+        self.updateMenuItems()
+        
+        
+        
+    # Updates the menu items - run this whenever the menu changes
+    def updateMenuItems(self):
+        
         self.menu_items = []
         # Store keys in an array to fix order and make easier to identify selected key
         for this_key in self.game_controls.getKeys():
@@ -68,11 +75,14 @@ class CustomControls:
     # If return is 'controls' then still in custon controls, so don't update anything else
     # If return is 'menu' then return to main game menu
     def update(self, keyboard):
+        # Handle erquest for new key
         if (self.status == STATUS_CUSTOM_KEY and self.menu_timer.getTimeRemaining() <= 0):
             keycode = self.checkKey(keyboard)
             if (keycode != None):
                 self.game_controls.setKey(self.selected_key, keycode)
+                self.menu_timer.startCountDown()
                 self.status = STATUS_MENU
+            self.updateMenuItems()
             return 'controls'
         # check if status is clicked - which means mouse was pressed on a valid entry
         if (self.status == STATUS_CLICKED):
@@ -96,9 +106,14 @@ class CustomControls:
                 self.reset()
                 # special case where selected_key is the save option
                 if (self.selected_key == 'save'):
-                    ##Todo
-                    # Handle save here
+                    # Save the controls
+                    self.game_controls.saveControls()
                     return 'menu'
+                # Another special case - blank entry used as a spacer
+                # Ignore and continue with custom controls menu
+                elif (self.selected_key == ''):
+                    self.menu_timer.startCountDown()
+                    return 'controls'
                 self.status = STATUS_CUSTOM_KEY
         elif (self.game_controls.isPressed(keyboard,'escape')):
             return 'menu'

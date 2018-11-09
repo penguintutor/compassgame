@@ -1,3 +1,4 @@
+import pickle
 from pgzero.keyboard import *
 # Holds and stores the selected controls
 # Works by having a method for each of the controls which tests if any selected
@@ -21,8 +22,29 @@ default_keys = {
 
 class GameControls:
     
-    def __init__(self):
+    def __init__(self, filename):
+        self.filename = filename
         self.configured_keys = default_keys.copy()
+        self.loadControls()
+        
+    # Controls (if it exists) is a pickle file  
+    def loadControls(self):
+        try:
+            with open(self.filename, 'rb') as infile:
+                self.configured_keys = pickle.load(infile)
+        except:
+            self.configured_keys = default_keys.copy()
+            
+        
+    # Replaces current file with configured_keys
+    def saveControls(self):
+        try:
+            with open(self.filename, "wb") as outfile:
+                pickle.dump (self.configured_keys, outfile, pickle.HIGHEST_PROTOCOL)
+        except Exception (e):
+            print ("Save custom controls failed")
+            print (str(e))
+            
         
         
     # Returns True if the key is pressed, else false

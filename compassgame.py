@@ -54,6 +54,8 @@ OBSTACLE_NUM_IMGS = 6
 
 # File holding high score
 HIGH_SCORE_FILENAME = 'compassgame_score.dat'
+# File holding custom controls
+CUSTOM_CONTROL_FILENAME  = 'compassgame_controls.dat'
 
 #Dictionary with messages to show to user for action to carry out
 action_text = {'north':'Go north', 'south':'Go south', 
@@ -64,7 +66,7 @@ action_text = {'north':'Go north', 'south':'Go south',
 # Track Status etc
 game_status = GamePlay(action_text)
 # Handles key interaction
-game_controls = GameControls()
+game_controls = GameControls(CUSTOM_CONTROL_FILENAME)
 
 # Track high score
 high_score = HighScore(game_controls, HIGH_SCORE_FILENAME)
