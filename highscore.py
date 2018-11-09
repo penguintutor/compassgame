@@ -125,6 +125,10 @@ class HighScore():
     def update(self, keyboard):
         if (self.pause_timer.getTimeRemaining() > 0):
             return 'highscore'
+        # If mouse clicked then exit to menu
+        if (self.mode == 'clicked'):
+            self.mode = 'display'
+            return 'menu'
         if (self.mode == 'edit'):
             # Editing
             if (self.game_controls.isPressed(keyboard,'up')):
@@ -157,7 +161,8 @@ class HighScore():
         pass
     
     def mouse_click (self,pos):
-        pass
+        # mouse click returns to main menu
+        self.mode = 'clicked'
     
     
     def updHighScoreList(self):
