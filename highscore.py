@@ -64,7 +64,7 @@ class HighScore():
         if (len(self.high_score_values) < self.max_entries):
             return True
         # Check if high score is higher than last entry 
-        if (new_score > self.high_score_values[self.max_entries] - 1):
+        if (new_score > self.high_score_values[self.max_entries-1]):
             return True
         return False
         

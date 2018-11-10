@@ -100,8 +100,7 @@ class GamePlay:
         
         
     def startNewGame(self):
-        self.score = 0
-        self.level = 1
+        self.reset()
         self.status = STATUS_NEW
         self.getNextMove()
         # Resets and start the timer
@@ -235,4 +234,4 @@ class GamePlay:
     def reset(self):
         self.level_actions_complete = 0
         self.score = 0
-        self.level = 0
+        self.level = 1

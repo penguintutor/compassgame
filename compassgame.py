@@ -346,7 +346,6 @@ def set_level_display(level_number):
     global obstacles
 
     game_level = level_number
-    #level_actions_complete = 0
     # Delete current obstacles
     obstacles = []    
     
