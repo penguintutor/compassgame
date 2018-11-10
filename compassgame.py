@@ -203,12 +203,13 @@ def update():
     # If status is not running then we give option to start or quit
     if (game_status.isNewGame() or game_status.isScoreShown()):
         # Display instructions (in draw() rather than here)
-        if (self.game_controls.isPressed(keyboard, 'escape')):
+        if (game_controls.isPressed(keyboard, 'escape')):
             quit()
         # If jump / duck then go to menu
-        if (game_control.isOrPressed(keyboard, ['jump', 'duck'])):            
-            # Reset player including score
+        if (game_controls.isOrPressed(keyboard, ['jump', 'duck'])):            
+            # Reset player and game including score
             player.reset()
+            game_satus.reset()
             game_status.setMenu()
             # Reset number of obstacles etc.
             set_level_display(game_status.getLevel())
@@ -345,7 +346,7 @@ def set_level_display(level_number):
     global obstacles
 
     game_level = level_number
-    level_actions_complete = 0
+    #level_actions_complete = 0
     # Delete current obstacles
     obstacles = []    
     
