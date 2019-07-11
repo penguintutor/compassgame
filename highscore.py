@@ -48,9 +48,9 @@ class HighScore():
                 self.high_score_names.append(this_name)
             file_exists = True
         except Exception as e:
-            # Unable to write to file - warn to console
+            # Unable to read to file - warn to console
             if (self.debug == True):
-                print ("Unable to read file "+self.filename+" high scores will not be reset\n"+str(e))
+                print ("Unable to read file "+self.filename+" high scores will be reset\n"+str(e))
             # If either doesn't exist or is corrupt add single dummy entry
             self.high_score_values.append(0)
             self.high_score_names.append("---")
